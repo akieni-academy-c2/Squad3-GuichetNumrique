@@ -7,9 +7,10 @@ Monorepo npm avec Turborepo.
 ```
 squad3/
 ├── package.json          # racine : workspaces apps/*, scripts turbo
-├── turbo.json            # pipelines dev / build / start / lint
+├── turbo.json            # pipelines dev / build / start
+├── .prettierrc.json      # configuration Prettier
 └── apps/
-    ├── frontend/         # @frontend/squad3  - Vite + React + TypeScript
+    ├── frontend/         # @frontend/squad3  - Vite + React, JavaScript
     └── backend/          # @backend/squad3   - Express, JavaScript
 ```
 
@@ -28,7 +29,8 @@ Depuis la racine :
 | `npm run dev`   | Lance les deux apps en mode développement                   |
 | `npm run build` | Build de production                                         |
 | `npm run start` | Démarre les builds de production                            |
-| `npm run lint`  | Vérifie le frontend (TypeScript) et le backend (syntaxe JS) |
+| `npm run format` | Formate tout le monorepo avec Prettier                 |
+| `npm run format:check` | Vérifie le formatage sans écrire    |
 
 Pour cibler une seule app :
 
