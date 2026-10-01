@@ -1,13 +1,9 @@
-import { Button } from "./components/ui/button.jsx";
+import { RouterProvider } from "react-router";
 import "./index.css";
+import { router } from "./routes.jsx";
 
 function App() {
-  return (
-    <div>
-      <Button variant="secondary">primary</Button>
-      <h1>hello world !</h1>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
