@@ -9,24 +9,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/context/auth-context.jsx";
 import {
   BookOpenIcon,
-  BotIcon,
+  FileTextIcon,
   Landmark,
   Settings2Icon,
   TerminalSquareIcon,
 } from "lucide-react";
-import { useEffect } from "react";
 
 const data = {
-  user: {
-    name: "johnDoe",
-    email: "john@Doe.cg",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
-      title: "Dashboard",
+      title: "Tableau de bord",
       url: "#",
       icon: <TerminalSquareIcon />,
       isActive: true,
@@ -36,30 +31,30 @@ const data = {
           url: "#",
         },
         {
-          title: "Demande en cour",
+          title: "Demandes en cours",
           url: "#",
         },
         {
-          title: "Document administrative",
+          title: "Documents administratifs",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Mes démarches",
       url: "#",
-      icon: <BotIcon />,
+      icon: <FileTextIcon />,
       items: [
         {
-          title: "Genesis",
+          title: "Nouvelle demande de CNI",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Renouvellement",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "Perte ou vol",
           url: "#",
         },
       ],
@@ -74,52 +69,25 @@ const data = {
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Pièces à fournir",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "Tutoriels",
           url: "#",
         },
         {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: <Settings2Icon />,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
+          title: "Nouveautés",
           url: "#",
         },
       ],
     },
   ],
 };
+
 export function AppSidebar({ ...props }) {
-  useEffect(() => {
-    fetch("/api/auth/me").then((r) =>
-      r.json().then((r) => {
-        console.log(r);
-      }),
-    );
-  }, []);
+  const { user } = useAuth();
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -131,9 +99,9 @@ export function AppSidebar({ ...props }) {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
-                  Centre Nationnal D'identificaion
+                  Centre National d'Identification
                 </span>
-                <span className="truncate text-xs">Adminstration</span>
+                <span className="truncate text-xs">Administration</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -143,7 +111,7 @@ export function AppSidebar({ ...props }) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   );

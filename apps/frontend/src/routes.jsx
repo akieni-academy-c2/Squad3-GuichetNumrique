@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import { Login } from "./pages/auth/Login.jsx";
+import { ProtectedRoute } from "./components/protected-route.jsx";
+import { Signin } from "./pages/auth/Signin.jsx";
 import { Signup } from "./pages/auth/Signup.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
 
@@ -8,13 +9,18 @@ const routes = [
   {
     path: "/auth",
     children: [
-      { path: "login", Component: Login },
+      { path: "signin", Component: Signin },
       { path: "signup", Component: Signup },
     ],
   },
   {
-    path: "/dashboard",
-    Component: Dashboard,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/dashboard",
+        Component: Dashboard,
+      },
+    ],
   },
 ];
 

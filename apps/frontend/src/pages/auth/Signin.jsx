@@ -10,19 +10,16 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useRegister } from "@/hooks/useRegister.js";
+import { useSignin } from "@/hooks/useSignin.js";
 
 const initialValues = {
-  nom: "",
-  prenom: "",
   email: "",
-  telephone: "",
   password: "",
 };
 
-export function Signup() {
+export function Signin() {
   const [values, setValues] = useState(initialValues);
-  const { register, isLoading, error } = useRegister();
+  const { signin, isLoading, error } = useSignin();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -31,7 +28,7 @@ export function Signup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    register(values);
+    signin(values);
   }
 
   return (
@@ -45,34 +42,10 @@ export function Signup() {
           >
             <FieldGroup>
               <div className="flex flex-col items-center gap-1 text-center">
-                <h1 className="text-2xl font-bold">Créer un compte</h1>
+                <h1 className="text-2xl font-bold">Connexion</h1>
                 <p className="text-sm text-balance text-muted-foreground">
-                  Renseignez vos informations pour vous inscrire
+                  Entrez vos identifiants pour accéder à votre compte
                 </p>
-              </div>
-              <div className="grid gap-6 sm:grid-cols-2">
-                <Field>
-                  <FieldLabel htmlFor="nom">Nom</FieldLabel>
-                  <Input
-                    id="nom"
-                    name="nom"
-                    value={values.nom}
-                    onChange={handleChange}
-                    placeholder="john"
-                    required
-                  />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="prenom">Prénom</FieldLabel>
-                  <Input
-                    id="prenom"
-                    name="prenom"
-                    value={values.prenom}
-                    onChange={handleChange}
-                    placeholder="Doe"
-                    required
-                  />
-                </Field>
               </div>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -87,18 +60,15 @@ export function Signup() {
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="telephone">Téléphone</FieldLabel>
-                <Input
-                  id="telephone"
-                  name="telephone"
-                  type="tel"
-                  value={values.telephone}
-                  onChange={handleChange}
-                  placeholder="+242 06 000 00 00"
-                />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
+                <div className="flex items-center">
+                  <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
+                  <a
+                    href="#"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                  >
+                    Mot de passe oublié ?
+                  </a>
+                </div>
                 <Input
                   id="password"
                   name="password"
@@ -111,15 +81,15 @@ export function Signup() {
               </Field>
               <Field>
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "Inscription..." : "S'inscrire"}
+                  {isLoading ? "Connexion..." : "Se connecter"}
                 </Button>
                 <FieldDescription className="text-center">
-                  Déjà un compte ?{" "}
+                  Pas encore de compte ?{" "}
                   <Link
-                    to="/auth/signin"
+                    to="/auth/signup"
                     className="underline underline-offset-4"
                   >
-                    Se connecter
+                    S&apos;inscrire
                   </Link>
                 </FieldDescription>
               </Field>
