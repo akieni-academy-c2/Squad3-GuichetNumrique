@@ -105,7 +105,7 @@ export const STEPS = [
   {
     number: 4,
     id: "depot",
-    title: "Dépôt",
+    title: "Etape Finale",
     description: "Rendez-vous",
     subSteps: [
       {
@@ -117,15 +117,15 @@ export const STEPS = [
           "Le rendez-vous physique n'est fixé qu'après la validation de votre dossier par un agent. Choisissez ici le centre où vous préférez être enrôlé.",
         fields: ["contact.pointServiceId"],
       },
-      {
-        number: 2,
-        id: "paiement",
-        label: "Paiement",
-        title: "Frais et timbres",
-        description:
-          "Règlement du timbre fiscal. La carte elle-même est gratuite en application du décret n° 2024-2692 du 13 novembre 2024. Le timbre fiscal sera présenté le jour de l'enrôlement.",
-        fields: ["paiement.moyen"],
-      },
+      // {
+      //   number: 2,
+      //   id: "paiement",
+      //   label: "Paiement",
+      //   title: "Frais et timbres",
+      //   description:
+      //     "Règlement du timbre fiscal. La carte elle-même est gratuite en application du décret n° 2024-2692 du 13 novembre 2024. Le timbre fiscal sera présenté le jour de l'enrôlement.",
+      //   fields: ["paiement.moyen"],
+      // },
       {
         number: 3,
         id: "recapitulatif",

@@ -18,6 +18,6 @@ export const STEP_COMPONENTS = {
   nationalite: Nationalite,
   photo_identite: PhotoIdentite,
   rendez_vous: RendezVous,
-  paiement: Paiement,
+  // paiement: Paiement,
   recapitulatif: Recapitulatif,
 };

@@ -17,7 +17,6 @@ import {
   TerminalSquareIcon,
 } from "lucide-react";
 
-import { TYPES_DEMANDE } from "@/lib/cni-config";
 import { DOCUMENTATION } from "@/lib/documentation";
 
 const data = {
@@ -26,20 +25,16 @@ const data = {
       title: "Tableau de bord",
       url: "/dashboard",
       icon: <TerminalSquareIcon />,
-      items: [
-        { title: "Historique", url: "#" },
-        { title: "Demandes en cours", url: "#" },
-        { title: "Documents administratifs", url: "#" },
-      ],
+      // items: [
+      //   { title: "Historique", url: "#" },
+      //   { title: "Demandes en cours", url: "#" },
+      //   { title: "Documents administratifs", url: "#" },
+      // ],
     },
     {
       title: "Mes démarches",
-      url: "/cni",
+      url: "/cni/formulaire/premiere_demande",
       icon: <FileTextIcon />,
-      items: TYPES_DEMANDE.map((type) => ({
-        title: type.label,
-        url: `/cni/formulaire/${type.value}`,
-      })),
     },
     {
       title: "Documentation",
@@ -66,9 +61,7 @@ export function AppSidebar({ ...props }) {
                 <Landmark className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
-                  Ministère de l'Intérieur
-                </span>
+                <span className="truncate font-medium">Guichet Numérique</span>
                 <span className="truncate text-xs">République du Congo</span>
               </div>
             </SidebarMenuButton>
