@@ -14,73 +14,41 @@ import {
   BookOpenIcon,
   FileTextIcon,
   Landmark,
-  Settings2Icon,
   TerminalSquareIcon,
 } from "lucide-react";
+
+import { TYPES_DEMANDE } from "@/lib/cni-config";
+import { DOCUMENTATION } from "@/lib/documentation";
 
 const data = {
   navMain: [
     {
       title: "Tableau de bord",
-      url: "#",
+      url: "/dashboard",
       icon: <TerminalSquareIcon />,
-      isActive: true,
       items: [
-        {
-          title: "Historique",
-          url: "#",
-        },
-        {
-          title: "Demandes en cours",
-          url: "#",
-        },
-        {
-          title: "Documents administratifs",
-          url: "#",
-        },
+        { title: "Historique", url: "#" },
+        { title: "Demandes en cours", url: "#" },
+        { title: "Documents administratifs", url: "#" },
       ],
     },
     {
       title: "Mes démarches",
-      url: "#",
+      url: "/cni",
       icon: <FileTextIcon />,
-      items: [
-        {
-          title: "Nouvelle demande de CNI",
-          url: "#",
-        },
-        {
-          title: "Renouvellement",
-          url: "#",
-        },
-        {
-          title: "Perte ou vol",
-          url: "#",
-        },
-      ],
+      items: TYPES_DEMANDE.map((type) => ({
+        title: type.label,
+        url: `/cni/formulaire/${type.value}`,
+      })),
     },
     {
       title: "Documentation",
-      url: "#",
+      url: "/cni/documentation",
       icon: <BookOpenIcon />,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Pièces à fournir",
-          url: "#",
-        },
-        {
-          title: "Tutoriels",
-          url: "#",
-        },
-        {
-          title: "Nouveautés",
-          url: "#",
-        },
-      ],
+      items: DOCUMENTATION.map((doc) => ({
+        title: doc.titre,
+        url: `/cni/documentation/${doc.slug}`,
+      })),
     },
   ],
 };

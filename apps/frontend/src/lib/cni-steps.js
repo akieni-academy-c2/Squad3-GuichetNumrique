@@ -139,15 +139,24 @@ export const STEPS = [
   },
 ];
 
-export function getStep(stepNumber) {
-  return STEPS.find((s) => s.number === stepNumber) ?? STEPS[0];
+/**
+ *
+ * @param {number} n
+ * @returns
+ */
+export function getStep(n) {
+  return STEPS.find((s) => s.number === n) ?? STEPS[0];
 }
 
-export function getSubStep(stepNumber, subStepNumber) {
-  const step = getStep(stepNumber);
-  return (
-    step.subSteps.find((s) => s.number === subStepNumber) ?? step.subSteps[0]
-  );
+/**
+ *
+ * @param {number} n
+ * @param {number} subN
+ * @returns
+ */
+export function getSubStep(n, subN) {
+  const step = getStep(n);
+  return step.subSteps.find((s) => s.number === subN) ?? step.subSteps[0];
 }
 
 export function isLastSubStep(stepNumber, subStepNumber) {

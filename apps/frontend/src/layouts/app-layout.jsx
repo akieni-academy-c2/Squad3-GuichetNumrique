@@ -18,8 +18,10 @@ export function AppLayout() {
             <SidebarTrigger className="-ml-1" />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 pt-0 lg:px-20">
-          <Outlet />
+        <main className="flex flex-1 flex-col gap-4 px-4 pb-10 md:px-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4">
+            <Outlet />
+          </div>
         </main>
       </SidebarInset>
     </SidebarProvider>

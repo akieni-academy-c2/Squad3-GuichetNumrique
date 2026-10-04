@@ -147,6 +147,34 @@ function isEmpty(value) {
   return false;
 }
 
+const PIECES_CLEFS = Object.keys(INITIAL_FORM.pieces);
+
+function migratePersistedState(persisted) {
+  if (!persisted?.form?.pieces) {
+    return persisted;
+  }
+
+  const pieces = { ...persisted.form.pieces };
+
+  if (
+    !("justificatif_sejour" in pieces) &&
+    "certificat_nationalite" in pieces
+  ) {
+    pieces.justificatif_sejour = pieces.certificat_nationalite;
+  }
+  delete pieces.certificat_nationalite;
+
+  return {
+    ...persisted,
+    form: {
+      ...persisted.form,
+      pieces: Object.fromEntries(
+        PIECES_CLEFS.map((cle) => [cle, pieces[cle] ?? null]),
+      ),
+    },
+  };
+}
+
 export const useStore = create(
   persist(
     (set, get) => ({
@@ -204,8 +232,9 @@ export const useStore = create(
       setSubmittedAt: (value) => set({ submittedAt: value }),
 
       markSubmitted: () => {
-        const state = get();
-        if (!state.isComplete()) {
+        const dernier = STEPS.at(-1);
+        get().completeSubStep(dernier.number, dernier.subSteps.length);
+        if (!get().isComplete()) {
           return false;
         }
         set({ submittedAt: new Date().toISOString() });
@@ -319,6 +348,20 @@ export const useStore = create(
           ),
         ),
 
+      isReadyToSubmit: () => {
+        const dernier = STEPS.at(-1);
+        const { completed } = get();
+        return STEPS.every((step) =>
+          step.subSteps.every((subStep) =>
+            step.number === dernier.number &&
+            subStep.number === dernier.subSteps.length
+              ? true
+              : completed[getCompletionKey(step.number, subStep.number)] ===
+                true,
+          ),
+        );
+      },
+
       getResumeStep: () => {
         const { completed } = get();
         for (const step of STEPS) {
@@ -384,6 +427,8 @@ export const useStore = create(
     }),
     {
       name: "cni-dossier",
+      version: 2,
+      migrate: migratePersistedState,
       partialize: (state) => ({
         typeDemande: state.typeDemande,
         step: state.step,

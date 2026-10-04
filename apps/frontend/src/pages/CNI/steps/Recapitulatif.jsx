@@ -25,7 +25,7 @@ import { StepShell } from "../StepShell";
 export function Recapitulatif() {
   const form = useStore((state) => state.form);
   const typeDemande = useStore((state) => state.typeDemande);
-  const isComplete = useStore((state) => state.isComplete());
+  const isComplete = useStore((state) => state.isReadyToSubmit());
   const frais = useStore((state) => state.getFrais());
   const delai = useStore((state) => state.getDelai());
 

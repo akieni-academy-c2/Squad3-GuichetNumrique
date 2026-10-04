@@ -22,7 +22,6 @@ const ETAPES = [
     description:
       "Acte de naissance original, photo d'identité, timbre fiscal et justificatif de séjour si vous êtes ressortissant d'un autre pays.",
     statutsFinaux: [STATUTS.BROUILLON],
-    cible: [1, 1],
   },
   {
     titre: "Déposer la demande",
@@ -31,7 +30,6 @@ const ETAPES = [
     statutsFinaux: [STATUTS.SOUMISE, STATUTS.VERIFICATION],
     action: "Remplir le formulaire",
     icone: ReceiptIcon,
-    cible: [1, 1],
   },
   {
     titre: "Faire vérifier le dossier",
@@ -40,7 +38,6 @@ const ETAPES = [
     statutsFinaux: [STATUTS.COMPLEMENT, STATUTS.VALIDEE],
     action: "Corriger mon dossier",
     icone: FileSearchIcon,
-    cible: [3, 1],
   },
   {
     titre: "Enrôlement biométrique",
@@ -49,7 +46,6 @@ const ETAPES = [
     statutsFinaux: [STATUTS.RENDEZ_VOUS, STATUTS.BIOMETRIE],
     action: "Voir mon rendez-vous",
     icone: FingerprintIcon,
-    cible: [4, 1],
   },
   {
     titre: "Retirer sa carte",
@@ -58,7 +54,6 @@ const ETAPES = [
     statutsFinaux: [STATUTS.DELIBERATION, STATUTS.DISPONIBLE, STATUTS.RETIREE],
     action: "Voir ma carte",
     icone: IdCard,
-    cible: [4, 3],
   },
 ];
 
@@ -117,10 +112,11 @@ function useProgression() {
 
 export function GettingStarted() {
   const progression = useProgression();
-  const goToStep = useStore((state) => state.goToStep);
+  const typeDemande = useStore((state) => state.typeDemande);
 
   const { courant, source, statut } = progression;
   const etapeCourante = ETAPES[Math.min(courant, ETAPES.length - 1)];
+  const urlFormulaire = typeDemande ? `/cni/formulaire/${typeDemande}` : "/cni";
 
   return (
     <Card className="md:col-span-2 lg:col-span-3">
@@ -196,7 +192,7 @@ export function GettingStarted() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => goToStep(...etape.cible)}
+                    render={<Link to={urlFormulaire} />}
                   >
                     <etape.icone />
                     {etape.action}
@@ -212,7 +208,7 @@ export function GettingStarted() {
             {etapeCourante.description}
           </p>
 
-          <Link to="/ask">
+          <Link to={urlFormulaire}>
             <Button size="sm">
               <MessageSquare />
               {source === "demande"
