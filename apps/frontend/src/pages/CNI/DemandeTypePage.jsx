@@ -32,29 +32,16 @@ export function DemandeTypePage() {
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold tracking-tight">
-          Demande de carte nationale d'identité
+          Quelle est votre demande ?
         </h1>
         <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed">
-          La carte nationale d'identité informatisée est le document officiel
-          d'identité délivré aux citoyens de la République du Congo. Elle est
-          valable {VALIDITE_CARTE_ANNEES} ans, renouvelable, et conditionne
-          toute démarche administrative, bancaire ou scolaire. Commencez par
-          indiquer le type de demande que vous souhaitez effectuer.
+          Le type de demande conditionne les pièces à fournir et les frais
+            applicables.
         </p>
       </header>
 
       <section className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <h2 className="text-base font-semibold tracking-tight">
-            Quelle est votre demande ?
-          </h2>
-          <p className="text-muted-foreground text-sm">
-            Le type de demande conditionne les pièces à fournir et les frais
-            applicables.
-          </p>
-        </div>
-
-        <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-3 md:grid-cols-3">
           {TYPES_DEMANDE.map((type) => {
             const active = type.value === typeDemande;
 
@@ -105,56 +92,6 @@ export function DemandeTypePage() {
           </div>
         )}
       </section>
-
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card size="sm">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <FileCheckIcon className="text-primary size-4" />
-              Pièces à fournir
-            </CardTitle>
-            <CardDescription>
-              Les mêmes pièces sont demandées quel que soit le type de demande.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="flex list-disc flex-col gap-1.5 pl-4">
-              {PIECES_REQUISES.map((piece) => (
-                <li key={piece} className="text-muted-foreground text-sm">
-                  {piece}
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card size="sm">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <ListChecksIcon className="text-primary size-4" />
-              Délais indicatifs
-            </CardTitle>
-            <CardDescription>
-              Les délais démarrent à l'enrôlement biométrique.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="flex flex-col gap-2">
-              {TYPES_DEMANDE.map((type) => (
-                <li
-                  key={type.value}
-                  className="flex flex-col gap-0.5 border-b pb-2 last:border-b-0 last:pb-0"
-                >
-                  <span className="text-sm font-medium">{type.label}</span>
-                  <span className="text-muted-foreground text-xs">
-                    {DELAIS[type.value]}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 }
