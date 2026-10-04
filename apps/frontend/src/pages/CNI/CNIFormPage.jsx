@@ -8,7 +8,6 @@ import { TOTAL_SUB_STEPS, getSubStep } from "@/lib/cni-steps";
 import { useStore } from "@/store/store";
 
 import { StepAside } from "./StepAside";
-import { TypeDemandeCard } from "./TypeDemandeCard";
 import { STEP_COMPONENTS } from "./step-components";
 
 export function CNIFormPage() {
@@ -57,12 +56,12 @@ export function CNIFormPage() {
 
   return (
     <>
-      <header className="flex flex-col gap-3 self-start">
+      <header className="flex flex-col gap-3 self-start w-full">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-semibold tracking-tight">
             Demande de carte nationale d'identité
           </h1>
-          <p className="text-muted-foreground max-w-3xl text-sm leading-relaxed">
+          <p className="text-muted-foreground max-w-4xl text-sm leading-relaxed">
             Déroulez les quatre étapes du formulaire. Vos saisies sont
             enregistrées automatiquement dans ce navigateur : vous pouvez
             quitter la page et reprendre votre dossier plus tard. Le dépôt
@@ -70,15 +69,13 @@ export function CNIFormPage() {
           </p>
         </div>
 
-        <div className="flex w-full max-w-md items-center gap-3">
+        <div className="flex w-full items-center gap-3">
           <Progress value={pourcentage} className="flex-1 gap-0" />
           <span className="text-muted-foreground text-xs tabular-nums">
             Étape {step} sur 4 · {termines}/{TOTAL_SUB_STEPS} sous-étapes
           </span>
         </div>
       </header>
-
-      <TypeDemandeCard />
 
       <div
         ref={stepperRef}
