@@ -1,11 +1,26 @@
 import { createBrowserRouter } from "react-router";
-import { Login } from "./pages/auth/Login.jsx";
+import { ProtectedRoute } from "./components/protected-route.jsx";
+import { Signin } from "./pages/auth/Signin.jsx";
+import { Signup } from "./pages/auth/Signup.jsx";
+import { Dashboard } from "./pages/Dashboard.jsx";
 
 /** @type {import("react-router").RouteObject[]} */
 const routes = [
   {
     path: "/auth",
-    children: [{ path: "login", Component: Login }],
+    children: [
+      { path: "signin", Component: Signin },
+      { path: "signup", Component: Signup },
+    ],
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/dashboard",
+        Component: Dashboard,
+      },
+    ],
   },
 ];
 
