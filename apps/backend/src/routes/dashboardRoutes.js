@@ -3,5 +3,11 @@ import { index } from "../controllers/dashboardController.js";
 import { authenticate, authorize } from "../middlewares/auth.js";
 
 const r = express.Router();
-r.get("/", authenticate, authorize("agent", "admin"), index);
+
+/**
+ * Disable authorization
+ *
+ * J'ai supprimé l'autorisation ici
+ */
+r.get("/", authenticate, /*authorize("agent", "admin"),*/ index);
 export default r;
