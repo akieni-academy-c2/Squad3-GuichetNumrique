@@ -20,7 +20,7 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
       - name: Deploy
-        run: npm exec --workspace=@frontend/squad3 wrangler pages deploy dist --project-name=cni-eembouz-com
+        run: npm exec --workspace=@frontend/squad3 -- wrangler pages deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
