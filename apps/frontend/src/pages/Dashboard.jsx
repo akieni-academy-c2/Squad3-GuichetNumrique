@@ -15,14 +15,14 @@ export function Dashboard() {
         <GettingStarted />
       </div>
 
-      <div>
+      {/* <div>
         {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
         <StatsCards
           demandesAujourdhui={stats?.demandesAujourdhui ?? 0}
           parStatut={stats?.parStatut ?? []}
           isLoading={isLoading}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
