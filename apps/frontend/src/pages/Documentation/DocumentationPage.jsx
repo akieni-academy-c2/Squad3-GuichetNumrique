@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { SOURCES_OFFICIELLES, getDocument } from "@/lib/documentation";
+import { OFFICIAL_SOURCES, getDocument } from "@/lib/documentation";
 
 export function DocumentationPage({ slug }) {
   const doc = getDocument(slug);
@@ -22,22 +22,17 @@ export function DocumentationPage({ slug }) {
 
   return (
     <article className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <h2 className="text-xl font-semibold tracking-tight">{doc.titre}</h2>
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          {doc.resume}
-        </p>
-      </header>
+      <h2 className="text-xl font-semibold tracking-tight">{doc.title}</h2>
 
       {doc.sections.map((section) => (
-        <section key={section.titre} className="flex flex-col gap-3">
-          <h3 className="text-sm font-semibold tracking-wide uppercase">
-            {section.titre}
+        <section key={section.title} className="flex flex-col gap-3">
+          <h3 className="text-sm font-semibold tracking-wide">
+            {section.title}
           </h3>
 
-          {section.contenu && (
+          {section.content && (
             <ul className="flex list-disc flex-col gap-2 pl-4">
-              {section.contenu.map((phrase) => (
+              {section.content.map((phrase) => (
                 <li key={phrase} className="text-sm leading-relaxed">
                   {phrase}
                 </li>
@@ -45,9 +40,9 @@ export function DocumentationPage({ slug }) {
             </ul>
           )}
 
-          {section.liste && (
+          {section.items && (
             <ul className="flex list-disc flex-col gap-2 pl-4">
-              {section.liste.map((item) => (
+              {section.items.map((item) => (
                 <li key={item} className="text-sm leading-relaxed">
                   {item}
                 </li>
@@ -55,7 +50,7 @@ export function DocumentationPage({ slug }) {
             </ul>
           )}
 
-          {section.tableau && (
+          {section.table && (
             <div className="border-border overflow-x-auto rounded-lg border">
               <Table>
                 <TableHeader>
@@ -67,22 +62,22 @@ export function DocumentationPage({ slug }) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {Object.values(section.tableau).map((entree) => (
-                    <TableRow key={entree.key}>
+                  {Object.values(section.table).map((entry) => (
+                    <TableRow key={entry.key}>
                       <TableCell>
-                        <span className="font-medium">{entree.label}</span>
+                        <span className="font-medium">{entry.label}</span>
                         <span className="text-muted-foreground block text-xs">
-                          {entree.hint}
+                          {entry.hint}
                         </span>
                       </TableCell>
                       <TableCell>
-                        {entree.obligatoire ? "Oui" : "Selon le cas"}
+                        {entry.obligatoire ? "Oui" : "Selon le cas"}
                       </TableCell>
                       <TableCell className="tabular-nums">
-                        {entree.extensions.join(", ")}
+                        {entry.extensions.join(", ")}
                       </TableCell>
                       <TableCell className="tabular-nums">
-                        {entree.maxSizeMb} Mo
+                        {entry.maxSizeMb} Mo
                       </TableCell>
                     </TableRow>
                   ))}
@@ -93,15 +88,14 @@ export function DocumentationPage({ slug }) {
         </section>
       ))}
 
-      <footer className="border-border text-muted-foreground flex flex-col gap-1 border-t pt-4 text-xs">
-        <span>Sources :</span>
-        {SOURCES_OFFICIELLES.map((source) => (
+      <footer className="border-border border-t pt-4">
+        {OFFICIAL_SOURCES.map((source) => (
           <a
             key={source.url}
             href={source.url}
             target="_blank"
             rel="noreferrer"
-            className="underline underline-offset-4"
+            className="text-muted-foreground text-xs underline underline-offset-4"
           >
             {source.label}
           </a>

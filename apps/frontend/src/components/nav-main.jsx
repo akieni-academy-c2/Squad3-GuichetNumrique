@@ -16,15 +16,15 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { ChevronRightIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router";
 
-function estLien(url) {
+function isLink(url) {
   return Boolean(url) && url !== "#";
 }
 
-function estActif(pathname, url) {
-  if (!estLien(url)) {
+function isActive(pathname, url) {
+  if (!isLink(url)) {
     return false;
   }
   if (url === "/dashboard") {
@@ -33,27 +33,21 @@ function estActif(pathname, url) {
   return pathname === url || pathname.startsWith(`${url}/`);
 }
 
-function NavGroup({ item, pathname, fermerSurMobile }) {
-  const actif = estActif(pathname, item.url);
-  const [ouvert, setOuvert] = useState(actif || Boolean(item.isActive));
-
-  useEffect(() => {
-    if (actif) {
-      setOuvert(true);
-    }
-  }, [actif]);
+function NavGroup({ item, pathname, closeOnMobile }) {
+  const groupIsActive = isActive(pathname, item.url);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Collapsible
-      open={ouvert}
-      onOpenChange={setOuvert}
+      open={isOpen}
+      onOpenChange={setIsOpen}
       render={<SidebarMenuItem />}
     >
       <SidebarMenuButton
         tooltip={item.title}
-        isActive={actif}
-        onClick={fermerSurMobile}
-        render={estLien(item.url) ? <Link to={item.url} /> : <span />}
+        isActive={groupIsActive}
+        onClick={closeOnMobile}
+        render={isLink(item.url) ? <Link to={item.url} /> : <span />}
       >
         {item.icon}
         <span>{item.title}</span>
@@ -72,14 +66,10 @@ function NavGroup({ item, pathname, fermerSurMobile }) {
               {item.items?.map((subItem) => (
                 <SidebarMenuSubItem key={subItem.title}>
                   <SidebarMenuSubButton
-                    isActive={estActif(pathname, subItem.url)}
-                    onClick={fermerSurMobile}
+                    isActive={isActive(pathname, subItem.url)}
+                    onClick={closeOnMobile}
                     render={
-                      estLien(subItem.url) ? (
-                        <Link to={subItem.url} />
-                      ) : (
-                        <span />
-                      )
+                      isLink(subItem.url) ? <Link to={subItem.url} /> : <span />
                     }
                   >
                     <span>{subItem.title}</span>
@@ -98,7 +88,7 @@ export function NavMain({ items }) {
   const { pathname } = useLocation();
   const { isMobile, setIsMobile } = useSidebar();
 
-  function fermerSurMobile() {
+  function closeOnMobile() {
     if (isMobile) {
       setIsMobile(false);
     }
@@ -113,7 +103,7 @@ export function NavMain({ items }) {
             key={item.title}
             item={item}
             pathname={pathname}
-            fermerSurMobile={fermerSurMobile}
+            closeOnMobile={closeOnMobile}
           />
         ))}
       </SidebarMenu>

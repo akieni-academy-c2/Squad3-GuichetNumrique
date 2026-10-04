@@ -46,7 +46,7 @@ const data = {
       url: "/cni/documentation",
       icon: <BookOpenIcon />,
       items: DOCUMENTATION.map((doc) => ({
-        title: doc.titre,
+        title: doc.title,
         url: `/cni/documentation/${doc.slug}`,
       })),
     },
