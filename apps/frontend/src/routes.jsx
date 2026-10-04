@@ -44,8 +44,8 @@ const routes = [
           {
             path: "/cni",
             children: [
-              { index: true, Component: DemandeTypePage },
-              { path: "formulaire/:type", Component: CNIFormPage },
+              // { index: true, Component: DemandeTypePage },
+              { index: true, path: "formulaire/:type", Component: CNIFormPage },
             ],
           },
         ],

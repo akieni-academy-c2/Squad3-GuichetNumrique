@@ -66,9 +66,7 @@ export function AppSidebar({ ...props }) {
                 <Landmark className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
-                  Ministère de l'Intérieur
-                </span>
+                <span className="truncate font-medium">Guichet Numérique</span>
                 <span className="truncate text-xs">République du Congo</span>
               </div>
             </SidebarMenuButton>

@@ -8,7 +8,7 @@ export function Dashboard() {
   return (
     <div className="grid grid-cols-1 gap-10 py-5">
       <div>
-        <h1 className="text-2xl font-bold">Suivi des demandes</h1>
+        <h1 className="text-2xl font-bold">Demande de CNI</h1>
       </div>
 
       <div>

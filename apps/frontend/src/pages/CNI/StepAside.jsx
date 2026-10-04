@@ -77,14 +77,14 @@ const AIDES = {
       "Choisissez un centre facilement accessible depuis votre adresse de résidence.",
     ],
   },
-  paiement: {
-    titre: "Frais",
-    contenu: [
-      "La carte nationale d'identité informatisée est gratuite (décret n° 2024-2692, article 10).",
-      "Seul le timbre fiscal est dû : il s'acquitte au guichet de l'antenne de collecte, le jour de l'enrôlement.",
-      "Aucun frais n'est débité par cette plateforme.",
-    ],
-  },
+  // paiement: {
+  //   titre: "Frais",
+  //   contenu: [
+  //     "La carte nationale d'identité informatisée est gratuite (décret n° 2024-2692, article 10).",
+  //     "Seul le timbre fiscal est dû : il s'acquitte au guichet de l'antenne de collecte, le jour de l'enrôlement.",
+  //     "Aucun frais n'est débité par cette plateforme.",
+  //   ],
+  // },
   recapitulatif: {
     titre: "Vérification finale",
     contenu: [
