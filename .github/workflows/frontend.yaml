@@ -1,0 +1,26 @@
+name: "DEPLOY FRONTEND"
+
+on:
+  push:
+    branches: [main, feat/deploy]
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: ./.github/actions/setup
+      - name: Build
+        run: npm run build --workspace=@root/frontend
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+      - name: Deploy
+        run: npm exec --workspace=@root/frontend wrangler pages deploy dist --project-name=library-eembouz-com
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
