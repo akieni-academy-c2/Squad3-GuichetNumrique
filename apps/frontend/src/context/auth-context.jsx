@@ -11,8 +11,6 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let cancelled = false;
-
     const restoreSession = async () => {
       const stored = localStorage.getItem(TOKEN_KEY);
       if (!stored) {
@@ -30,30 +28,18 @@ export function AuthProvider({ children }) {
         }
 
         const body = await res.json();
-        if (cancelled) {
-          return;
-        }
         setUser(body.data);
         setToken(stored);
       } catch {
-        if (cancelled) {
-          return;
-        }
         localStorage.removeItem(TOKEN_KEY);
         setUser(null);
         setToken(null);
       } finally {
-        if (!cancelled) {
-          setIsLoading(false);
-        }
+        setIsLoading(false);
       }
     };
 
     restoreSession();
-
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
   /**
