@@ -2,7 +2,6 @@ import {
   CENTRES_CNI,
   DELAI_MODIFICATION_HEURES,
   DELAIS,
-  FRAIS,
   MOTIFS_REMPLACEMENT,
   MOTIFS_REJET,
   PIECES_ACTE,
@@ -15,8 +14,8 @@ import {
 export const OFFICIAL_SOURCES = [
   {
     label:
-      "Décret n° 2024-2692 du 13 novembre 2024 modifiant le décret n° 2009-57",
-    url: "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/117585/COG-117585.pdf",
+      "Décret n° 2024-2692 du 13 novembre 2024 modifiant le décret n° 2009-57 du 13 mars 2009",
+    url: "https://www.sgg.cg/JO/2024/congo-jo-2024-47.pdf",
   },
 ];
 
@@ -26,247 +25,370 @@ export const DOCUMENTATION = [
     title: "Introduction à la carte nationale d'identité",
     sections: [
       {
-        title: "Définition",
+        title: "Qu'est-ce que la CNI ?",
         content: [
-          "La carte nationale d'identité informatisée est le document officiel d'identité délivré aux citoyens de la République du Congo. Elle constitue la seule preuve admise de l'identité civile.",
-          "Elle est produite par les centres de production de Brazzaville, de Pointe-Noire et d'Oyo, puis remise au requérant par le chef de la section départementale ou le chef de l'antenne de collecte de son lieu d'enrôlement.",
+          "La carte nationale d'identité informatisée et sécurisée est le document officiel qui certifie l'identité de son titulaire.",
+          `La carte est délivrée aux personnes de nationalité congolaise ayant atteint l'âge de 16 ans révolus, ainsi qu'aux personnes concernées par certaines dispositions du Code de la nationalité congolaise.`,
         ],
       },
       {
-        title: "Base légale",
+        title: "Durée de validité",
         content: [
-          "Décret n° 2009-57 du 13 mars 2009 portant création de la carte nationale d'identité informatisée et sécurisée.",
-          "Décret n° 2024-2692 du 13 novembre 2024, qui a modifié le décret précédent : durée de validité portée à dix ans, centres de production et conditions de délivrance précisés.",
+          `La carte nationale d'identité a une durée de validité de ${VALIDITE_CARTE_ANNEES} ans et est renouvelable.`,
+          "Les modalités précises du renouvellement sont fixées par arreté du ministre chargé de la sécurité.",
         ],
       },
       {
-        title: `Durée de validité : ${VALIDITE_CARTE_ANNEES} ans`,
+        title: "Ce que contient la carte",
         content: [
-          `La carte est valable ${VALIDITE_CARTE_ANNEES} ans à compter de sa date d'émission. Passé ce délai, elle doit être renouvelée.`,
-          "Le renouvellement n'ouvre pas un nouveau dossier complet : l'ancien numéro de carte est demandé pour rattacher le dossier à l'existant.",
+          "La carte comporte notamment les nom et prénoms, la date et le lieu de naissance, le sexe, l'adresse, le numéro national ainsi que le numéro de la carte.",
+          "Elle comporte également une photographie, les informations relatives aux parents, la date d'émission, la date d'expiration et des éléments de sécurité permettant d'en protéger l'authenticité.",
+          "La nouvelle génération de carte comporte notamment un code PDF 417 et une zone MRZ contenant des informations sécurisées.",
         ],
       },
       {
-        title: "Mentions portées sur la carte",
+        title: "A quoi sert la CNI ?",
         content: [
-          "Nom, prénoms, date et lieu de naissance, sexe, adresse du titulaire.",
-          "Numéro national d'identification, noms et prénoms du père et de la mère.",
-          "Date d'émission, date d'expiration, signature du titulaire, empreinte du pouce gauche et photographie.",
+          "La CNI permet de justifier officiellement l'identité de son titulaire dans le cadre des démarches nécessitant une pièce d'identité.",
+          "Elle est utilisée dans de nombreuses démarches administratives et peut être demandée par différents organismes publics ou privés.",
         ],
       },
       {
-        title: "Rectification des données",
+        title: "Port de la carte",
         content: [
-          "Le nom patronymique ne peut être corrigé que par arrêté du ministre chargé de la justice, publié au Journal Officiel.",
-          "L'ajout, la suppression ou la rectification d'un prénom relève du juge : jugement rectificatif du tribunal de grande instance ou du tribunal d'instance.",
+          "Le port de la carte nationale d'identité informatisée et sécurisée est obligatoire.",
+          "Il est donc important de conserver sa carte dans un état permettant son identification et de signaler rapidement toute perte, vol ou destruction.",
         ],
       },
       {
-        title: "À quoi elle sert",
+        title: "Rectification des informations",
         content: [
-          "Pièce exigée pour toute démarche administrative : état civil, enregistrement, demandes de recours.",
-          "Pièce exigée pour l'ouverture d'un compte bancaire, l'inscription scolaire et les opérations d'assurance.",
-          "Document de voyage reconnu dans l'espace CEMAC.",
+          "La rectification d'une information figurant sur la carte peut nécessiter la présentation d'un document officiel justifiant la modification.",
+          "La rectification du nom patronymique nécessite un arrêté du ministre chargé de la justice publié au Journal officiel.",
+          "L'ajout, la suppression ou la rectification d'un prénom nécessite un jugement rectificatif délivré par la juridiction compétente.",
         ],
       },
     ],
   },
+
   {
     slug: "pieces-a-fournir",
     title: "Pièces à fournir",
     sections: [
       {
-        title: "Documents constitutifs du dossier",
-        items: PIECES_REQUISES,
-      },
-      {
-        title: "Original obligatoire",
+        title: "Documents admis",
         content: [
-          "Seul l'acte de naissance original est admis. Les extraits et les copies d'acte sont rejetés d'office : ce n'est pas une tolérance de l'agent mais une règle du texte.",
-          "Cette exigence s'applique aussi aux pièces jointes en ligne : une photo d'un extrait ne peut pas remplacer la présentation de l'acte.",
+          "La réglementation prévoit plusieurs documents pouvant permettre la délivrance de la carte nationale d'identité.",
+          "Selon votre situation, le dossier peut notamment être constitué à partir d'un acte de naissance, d'une déclaration tardive de naissance, d'un livret de famille, d'un jugement supplétif accompagné de sa transcription ou d'un acte de notoriété tenant lieu d'acte de naissance.",
         ],
       },
       {
-        title: "Formats et tailles",
+        title: "Pièces constitutives du dossier",
+        items: PIECES_REQUISES,
+      },
+      {
+        title: "Documents originaux",
+        content: [
+          "Les extraits ou les copies des pièces prévues par le décret ne sont pas admis.",
+          "Lorsque votre situation nécessite un document particulier, veillez donc à présenter le document correspondant dans la forme prévue par la réglementation.",
+        ],
+      },
+      {
+        title: "Cas particuliers",
+        content: [
+          "Un jugement supplétif doit etre accompagné de sa transcription délivrée par l'officier d'état civil compétent ainsi que d'une carte d'identité de l'un des parents.",
+          "Un acte de notoriété tenant lieu d'acte de naissance doit également être accompagné d'une carte d'identité de l'un des parents.",
+          "L'adjonction du nom de l'époux nécessite la présentation de l'acte de mariage dûment enregistré dans le registre de l'état civil.",
+        ],
+      },
+      {
+        title: "Formats et tailles des fichiers",
         table: PIECES_ACTE,
       },
       {
-        title: "Ressortissants d'un autre pays",
+        title: "Avant de déposer votre dossier",
         content: [
-          "La nationalité d'un citoyen congolais est établie par son acte de naissance : aucun justificatif supplémentaire n'est demandé à cette étape.",
-          "Tout ressortissant d'un autre pays doit justifier d'un séjour régulier en cours de validité : passeport et carte de séjour ou permis de séjour CEMAC.",
+          "Vérifiez que les informations de vos documents correspondent exactement aux informations saisies dans votre demande.",
+          "Assurez-vous également que les documents transmis sont lisibles et complets.",
+          "Une pièce illisible, incomplète ou non conforme peut entrainer une demande de complément ou empecher le traitement du dossier.",
         ],
       },
     ],
   },
+
   {
     slug: "actes-acceptes",
     title: "Nature des actes acceptés",
     sections: [
       {
-        title: "Documents admis",
-        items: TYPES_ACTE.map((acte) => `${acte.label} — ${acte.hint}`),
+        title: "Documents prévus par la réglementation",
+        items: TYPES_ACTE.map(
+          (acte) => `${acte.label} - ${acte.hint}`,
+        ),
       },
       {
-        title: "Si vous ne disposez que d'un extrait",
+        title: "Acte de naissance",
         content: [
-          "Retirez l'acte au service d'état civil de la commune ou de l'arrondissement où la naissance a été enregistrée, et non un simple extrait.",
-          "Le cas échéant, faites-vous délivrer un duplicata d'acte par l'officier d'état civil : il fait foi et est admis.",
+          "L'acte de naissance fait partie des documents pouvant etre présentés pour la délivrance de la CNI.",
+          "Les extraits ou copies des pièces prévues par le décret ne sont pas admis.",
         ],
       },
       {
-        title: "Mentions marginales",
+        title: "Déclaration tardive de naissance",
         content: [
-          "Les mentions marginales doivent être à jour. Un acte dont les mentions ne sont pas actualisées est considéré comme non exploitable.",
-          "Faites vérifier l'acte avant de déposer le dossier : une mention marginale manquante entraîne un retour en complément.",
+          "La déclaration tardive de naissance fait partie des pièces prévues par le décret pour la délivrance de la carte nationale d'identité.",
+          "Si votre dossier repose sur une déclaration tardive, vérifiez que vous disposez du document correspondant avant de commencer votre demande.",
         ],
       },
       {
-        title: "Déclarations tardives",
+        title: "Jugement supplétif",
         content: [
-          "La déclaration tardive de naissance est établie lorsque l'inscription n'a pas eu lieu dans le délai légal.",
-          "Le jugement supplétif doit être accompagné de sa transcription : c'est la transcription qui fait foi, pas le jugement seul.",
+          "Le jugement supplétif doit être accompagné de sa transcription délivrée par l'officier d'état civil compétent.",
+          "Une carte d'identité de l'un des parents doit également être présentée dans ce cas.",
+        ],
+      },
+      {
+        title: "Acte de notoriété",
+        content: [
+          "L'acte de notoriété tenant lieu d'acte de naissance fait partie des pièces prévues par le décret.",
+          "Il doit être accompagné d'une carte d'identité de l'un des parents.",
+        ],
+      },
+      {
+        title: "Informations à vérifier",
+        content: [
+          "Avant le dépot, vérifiez que les informations figurant sur votre document d'état civil correspondent aux informations saisies dans votre demande.",
+          "En cas de divergence, il peut etre nécessaire de faire régulariser la situation avant la demande de CNI.",
         ],
       },
     ],
   },
+
   {
     slug: "types-de-demande",
     title: "Types de demande",
     sections: [
       {
-        title: "Les trois types",
+        title: "Les différents types de demande",
         items: TYPES_DEMANDE.map(
-          (type) => `${type.label} — ${type.description}`,
+          (type) => `${type.label} - ${type.description}`,
         ),
       },
       {
         title: "Première demande",
         content: [
-          "Vous n'avez jamais eu de carte nationale d'identité congolaise.",
-          "Le dossier est constitué à partir de zéro : aucun ancien numéro n'est demandé.",
+          "Cette démarche concerne une personne qui demande une carte nationale d'identité pour la première fois.",
+          "Les documents nécessaires sont ceux permettant d'établir l'identité du demandeur conformément à la réglementation.",
         ],
       },
       {
         title: "Renouvellement",
         content: [
-          `Votre carte approche de sa date d'expiration, soit ${VALIDITE_CARTE_ANNEES} ans après sa délivrance.`,
-          "L'ancien numéro de carte est obligatoire : il permet de retrouver le dossier existant plutôt que d'en créer un second.",
+          `La carte nationale d'identité est valable ${VALIDITE_CARTE_ANNEES} ans et est renouvelable.`,
+          "Les modalités précises du renouvellement sont fixées par arrêté du ministre chargé de la sécurité.",
+          "Consultez les informations demandées par la plateforme afin de savoir quels éléments fournir pour votre situation.",
         ],
       },
       {
         title: "Duplicata",
         content: [
-          "La carte a été perdue, volée, détruite ou devient illisible, ou porte une erreur de données.",
-          "Motifs déclarés :",
-          ...MOTIFS_REMPLACEMENT.map((motif) => motif.label),
-          "En cas de vol, la déclaration doit être accompagnée d'une plainte déposée au commissariat.",
+          "En cas de perte, de vol ou de destruction de la carte nationale d'identité, le titulaire doit effectuer immédiatement une déclaration auprès du commissariat de police d'arrondissement ou du district le plus proche de son lieu de résidence.",
+          "Une attestation de perte, de vol ou de destruction peut être délivrée par le commissaire de police. Sa validité ne peut excéder trois mois.",
+        ],
+      },
+      {
+        title: "Carte endommagée ou illisible",
+        content: [
+          "Si votre carte est détériorée au point de ne plus permettre une identification correcte, vérifiez auprès du service compétent la procédure applicable à votre situation.",
+          "Ne créez pas une nouvelle demande avant d'avoir vérifié si votre situation relève d'un renouvellement ou d'un duplicata.",
         ],
       },
       {
         title: "Frais",
         content: [
-          "La carte elle-même est gratuite : l'article 10 du décret n° 2024-2692 précise que la délivrance de la carte informatisée et sécurisée est gratuite.",
-          `Seul le timbre fiscal de ${FRAIS.timbre_fiscal} FCFA est dû, et il s'acquitte au guichet de l'antenne de collecte.`,
+          "La délivrance de la carte nationale d'identité informatisée et sécurisée est gratuite conformément à l'article 10 du décret n° 2024-2692 du 13 novembre 2024.",
+          "Si une somme ou une pièce financière est demandée dans le cadre d'une démarche complémentaire, vérifiez son fondement auprès du service administratif compétent.",
         ],
       },
     ],
   },
+
   {
     slug: "delais-de-traitement",
     title: "Délais de traitement",
     sections: [
       {
-        title: "Délais indicatifs",
         items: TYPES_DEMANDE.map(
-          (type) => `${type.label} — ${DELAIS[type.value]}`,
-        ),
+        (type) =>
+          `${type.label} — ${
+            DELAIS[/** @type {keyof typeof DELAIS} */ (type.value)]
+          }`,
+      ),
       },
       {
-        title: "Le délai court à partir de l'enrôlement",
+        title: "Attention aux délais affichés",
         content: [
-          "Les délais ci-dessus démarrent à l'enrôlement biométrique, pas à la création du dossier en ligne.",
-          "Un dossier déposé mais non enrôlé n'est pas encore dans le circuit de production.",
+          "Les délais affichés sur cette plateforme sont indicatifs et peuvent dépendre de l'état du dossier, des contrôles nécessaires et du traitement administratif.",
+          "Un délai affiché dans l'application ne constitue pas nécessairement un délai légal garanti par un texte réglementaire.",
         ],
       },
       {
-        title: "Vérifier l'état de son dossier",
+        title: "Pourquoi un dossier peut prendre plus de temps ?",
         content: [
-          "Un agent contrôle la cohérence entre les informations saisies et l'acte de naissance, et peut demander un complément de pièces.",
-          "Une demande de complément suspend le délai de production jusqu'à réception des pièces manquantes.",
+          "Le traitement peut être prolongé lorsqu'une information doit être vérifiée ou lorsqu'un document complémentaire est nécessaire.",
+          "Une demande incomplète ou contenant des informations incohérentes peut nécessiter une intervention supplémentaire avant la poursuite du traitement.",
+        ],
+      },
+      {
+        title: "Suivre l'état de sa demande",
+        content: [
+          "Utilisez votre espace personnel pour consulter l'état d'avancement de votre demande.",
+          "Lorsque le statut de votre dossier évolue, les informations disponibles dans votre espace vous permettent de connaître la prochaine étape à effectuer.",
         ],
       },
       {
         title: "Correction après dépôt",
         content: [
-          `Après le dépôt, vous disposez de ${DELAI_MODIFICATION_HEURES} heures pour corriger une information erronée depuis cette plateforme.`,
-          "Passé ce délai, toute modification nécessite une nouvelle demande.",
+          `La plateforme peut vous permettre de corriger certaines informations pendant ${DELAI_MODIFICATION_HEURES} heures après le dépôt, selon les règles fonctionnelles définies par le service.`,
+          "Ce délai correspond au fonctionnement de la plateforme et ne doit pas être interprété comme une disposition générale du décret relatif à la CNI.",
         ],
       },
     ],
   },
+
   {
     slug: "motifs-de-rejet",
-    title: "Motifs de rejet du dossier",
+    title: "Motifs de rejet et demandes de complément",
     sections: [
       {
         title: "Motifs fréquents",
         items: MOTIFS_REJET,
       },
       {
-        title: "Rejet ou retour en complément",
+        title: "Pourquoi une demande peut être refusée ?",
         content: [
-          "Le dossier est rejeté lorsque l'acte de naissance fait défaut : document illisible, mentions marginales non à jour, extrait ou copie présenté au lieu de l'original.",
-          "Le dossier est renvoyé en complément lorsque les informations sont corrigeables : divergence de saisie avec l'acte, photo non conforme, pièce manquante.",
-          "Un retour en complément ne coûte pas de nouveau dossier : les pièces déjà transmises sont conservées.",
+          "Une demande peut rencontrer une difficulté lorsque les pièces fournies ne correspondent pas aux documents requis ou lorsque les informations nécessaires ne peuvent pas être vérifiées.",
+          "Les extraits ou copies des pièces prévues par le décret ne sont notamment pas admis.",
+          "Une incohérence entre les informations saisies et les documents présentés peut également nécessiter une vérification ou une correction.",
         ],
       },
       {
-        title: "Ce qui n'est pas un motif de rejet",
+        title: "Rejet ou demande de complément",
         content: [
-          "Un simple nom écrit en minuscules, ou une espace insérée dans un prénom : la saisie est corrigée par l'agent.",
-          "Une demande de nationalité étrangère : elle déclenche un contrôle complémentaire, pas un rejet.",
+          "Un rejet signifie que la demande ne peut pas être poursuivie dans son état actuel.",
+          "Une demande de complément signifie qu'une information ou une pièce supplémentaire est nécessaire avant de poursuivre le traitement.",
+          "Lorsque la plateforme vous demande un complément, consultez précisément le motif indiqué avant de transmettre un nouveau document.",
+        ],
+      },
+      {
+        title: "Comment éviter un retour du dossier ?",
+        content: [
+          "Relisez toutes les informations saisies avant de valider votre demande.",
+          "Vérifiez la lisibilité et la conformité des documents transmis.",
+          "Utilisez les documents correspondant exactement à votre situation.",
+          "En cas de doute sur une pièce administrative, renseignez-vous auprès du service compétent avant le dépôt.",
         ],
       },
     ],
   },
+
   {
     slug: "centres-de-production",
     title: "Centres de production",
     sections: [
       {
-        title: "Centres de production de la carte",
+        title: "Centres de production",
+        content: [
+          "La CNI informatisée et sécurisée ainsi que son duplicata sont exclusivement produits par les centres de production de Brazzaville, de Pointe-Noire et d'Oyo.",
+        ],
+      },
+      {
+        title: "Centres concernés",
         items: CENTRES_CNI.map(
           (centre) => `${centre.label} — ${centre.description}`,
         ),
       },
       {
-        title: "Où vous êtes enrôlé et où vous retirez",
+        title: "Lieu de délivrance",
         content: [
-          "Vous ne vous déplacez pas dans un centre de production : l'enrôlement biométrique a lieu à l'antenne de collecte de votre lieu de résidence, choisie dans le formulaire.",
-          "La carte est ensuite produite à Brazzaville, Pointe-Noire ou Oyo, puis retirée auprès du chef de section départementale ou du chef d'antenne de collecte de votre lieu d'enrôlement.",
+          "Selon le décret n° 2024-2692, la carte est délivrée par les chefs de sections départementales et les chefs d'antennes de collecte de données du lieu d'enrôlement du requérant.",
+          "Le lieu d'enrôlement et le centre de production ne correspondent donc pas nécessairement au même endroit.",
         ],
       },
       {
-        title: "Prise de rendez-vous",
+        title: "Enrôlement",
         content: [
-          "Le rendez-vous est attribué par un agent après validation du dossier. Il n'y a rien à réserver depuis cette plateforme.",
-          "Une présentation sans rendez-vous enregistré entraîne un renvoi du dossier.",
+          "L'enrolement constitue une étape distincte de la production matérielle de la carte.",
+          "Les informations relatives au lieu et aux modalités d'enrolement doivent etre vérifiées selon les indications fournies par le service compétent ou par la plateforme.",
         ],
       },
       {
-        title: "À présenter le jour de l'enrôlement",
-        items: [
-          "Le récépissé de dépôt.",
-          "L'acte de naissance original.",
-          "Le timbre fiscal acquitté.",
-          "Votre ancienne carte en cas de renouvellement ou de duplicata.",
+        title: "Retrait de la carte",
+        content: [
+          "Une fois la carte produite et disponible, les modalités de retrait dépendent du lieu et du circuit de délivrance associés à votre enrôlement.",
+          "Consultez votre espace personnel ou les indications communiquées par le service pour connaître les modalités applicables à votre dossier.",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "perte-vol-destruction",
+    title: "Perte, vol ou destruction de la carte",
+    sections: [
+      {
+        title: "Que faire immédiatement ?",
+        content: [
+          "En cas de perte, de vol ou de destruction de votre carte nationale d'identité, vous devez effectuer immédiatement une déclaration auprès du commissariat de police d'arrondissement ou du district le plus proche de votre lieu de résidence.",
+        ],
+      },
+      {
+        title: "Attestation",
+        content: [
+          "Le commissaire de police peut délivrer une attestation de perte, de vol ou de destruction.",
+          "Cette attestation est délivrée gratuitement et sa validité ne peut excéder trois mois.",
+        ],
+      },
+      {
+        title: "Après la déclaration",
+        content: [
+          "Conservez précieusement l'attestation délivrée par le commissariat.",
+          "Elle pourra etre nécessaire pour effectuer les démarches relatives au remplacement de votre carte.",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "sources-officielles",
+    title: "Sources officielles",
+    sections: [
+      {
+        title: "Texte réglementaire principal",
+        content: [
+          "Décret n° 2024-2692 du 13 novembre 2024 modifiant le décret n° 2009-57 du 13 mars 2009 portant création de la carte nationale d'identité informatisée et sécurisée.",
+        ],
+      },
+      {
+        title: "Informations importantes",
+        content: [
+          "Les informations présentées dans cette documentation sont destinées à faciliter la compréhension des démarches liées à la CNI.",
+          "Pour une interprétation juridique ou pour connaître une modification récente de la réglementation, il convient de se référer aux textes officiels publiés par les autorités compétentes.",
+        ],
+      },
+      {
+        title: "Journal officiel",
+        content: [
+          "Le décret n° 2024-2692 a été publié au Journal officiel de la République du Congo, édition n° 47 du 21 novembre 2024.",
         ],
       },
     ],
   },
 ];
 
+/**
+ * @param {string} slug
+ */
 export function getDocument(slug) {
   return DOCUMENTATION.find((doc) => doc.slug === slug) ?? null;
 }
