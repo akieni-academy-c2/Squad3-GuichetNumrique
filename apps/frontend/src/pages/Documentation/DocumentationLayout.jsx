@@ -27,7 +27,7 @@ export function DocumentationLayout() {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex items-center gap-3">
-        <div className="bg-primary/10 text-primary flex aspect-square size-9 shrink-0 items-center justify-center rounded-lg">
+        <div className="text-primary flex aspect-square size-9 shrink-0 items-center justify-center rounded-lg">
           <BookOpenIcon className="size-5" />
         </div>
         <h1 className="text-2xl font-bold tracking-tight">Documentation</h1>

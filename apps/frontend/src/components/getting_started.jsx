@@ -13,7 +13,7 @@ import { LIBELLES_STATUTS, STATUTS } from "@/api/demandes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { TOTAL_SUB_STEPS } from "@/lib/cni-steps";
+import { getCompletionKey, getStep, TOTAL_SUB_STEPS } from "@/lib/cni-steps";
 import { useStore } from "@/store/store";
 
 const ETAPES = [
@@ -57,6 +57,29 @@ const ETAPES = [
   },
 ];
 
+const CHECKLIST_FORM_STEPS = [
+  [1, 2],
+  [3, 4],
+];
+
+/**
+ *
+ * @param {number} itemIndex
+ * @param {Record<string, any>} completed
+ * @returns
+ */
+function isChecklistItemComplete(itemIndex, completed) {
+  const formSteps = CHECKLIST_FORM_STEPS[itemIndex] ?? [];
+  if (formSteps.length === 0) {
+    return false;
+  }
+  return formSteps.every((stepNumber) =>
+    getStep(stepNumber).subSteps.every(
+      (subStep) => completed[getCompletionKey(stepNumber, subStep.number)],
+    ),
+  );
+}
+
 function useProgression() {
   const statut = useStore((state) => state.statut);
   const completed = useStore((state) => state.completed);
@@ -94,9 +117,8 @@ function useProgression() {
     };
   }
 
-  const courant = Math.min(
-    ETAPES.length,
-    Math.floor((sousEtapesTerminees / TOTAL_SUB_STEPS) * ETAPES.length) + 1,
+  const courant = ETAPES.findIndex(
+    (_, index) => !isChecklistItemComplete(index, completed),
   );
 
   return {
@@ -115,7 +137,7 @@ export function GettingStarted() {
   const typeDemande = useStore((state) => state.typeDemande);
 
   const { courant, source, statut } = progression;
-  const etapeCourante = ETAPES[Math.min(courant, ETAPES.length - 1)];
+  const etapeCourante = ETAPES[courant];
   const urlFormulaire = typeDemande ? `/cni/formulaire/${typeDemande}` : "/cni";
 
   return (
@@ -147,8 +169,7 @@ export function GettingStarted() {
 
         <div className="flex flex-col gap-3">
           {ETAPES.map((etape, index) => {
-            const done =
-              source === "demande" ? index < courant : index < courant - 1;
+            const done = index < courant;
             const active = index === courant;
 
             return (
