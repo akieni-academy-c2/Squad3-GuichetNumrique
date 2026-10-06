@@ -69,20 +69,55 @@ Suivi de la demande
 
 ## Technologies
 
-Le frontend du projet est développé avec :
+### Frontend
 
 * React
 * Vite
 * JavaScript
 * Tailwind CSS
 * React Router
-* shadcn/ui
+* shadcn
+* Zustand
+* Lucide React
+
+### Backend
+
+* Express
+* JavaScript
+
+### Outils
+
+* Turbo
+* npm
+* Prettier
+
+## Architecture du projet
+
+Le projet est organisé en **monorepo** avec deux applications principales :
+
+```text
+squad3/
+├── package.json          # Racine : workspaces apps/*, scripts Turbo
+├── turbo.json            # Configuration des tâches dev / build / start
+├── .prettierrc.json      # Configuration Prettier
+└── apps/
+    ├── frontend/         # @frontend/squad3 — Vite + React, JavaScript
+    └── backend/          # @backend/squad3  — Express, JavaScript
+```
+
+### Frontend
+
+L'application frontend est développée avec React, Vite et JavaScript. Elle contient notamment les composants, pages, layouts, hooks, contextes, stores et services nécessaires à l'interface utilisateur.
+
+### Backend
+
+L'application backend est développée avec Express et JavaScript. Elle constitue la partie serveur de la plateforme.
 
 ## Installation
 
 ### Prérequis
 
-* Node.js
+* Node.js 20 ou supérieur
 * npm
 * Git
 
@@ -96,36 +131,41 @@ npm install
 
 ### Lancer le projet
 
+Pour lancer le projet en mode développement :
+
 ```bash
-cd apps/frontend
 npm run dev
 ```
 
-## Structure du projet
+Le monorepo utilise **Turbo** pour gérer les différentes applications.
 
-Le projet est organisé autour d'une application frontend située dans :
+### Construire le projet
 
-```text
-apps/
-└── frontend/
-    ├── public/
-    ├── src/
-    │   ├── api/
-    │   ├── components/
-    │   ├── context/
-    │   ├── hooks/
-    │   ├── layouts/
-    │   ├── lib/
-    │   ├── pages/
-    │   └── store/
-    └── ...
+```bash
+npm run build
 ```
 
+### Formater le code
+
+```bash
+npm run format
+```
+
+Pour vérifier le formatage :
+
+```bash
+npm run format:check
+```
 
 ## Statut
 
 **MVP en cours de développement.**
 
+## Équipe
+
+** Squad 3**
+
+Projet réalisé dans le cadre de notre deuxieme evaluation de la formation Akieni  **Guichet Numérique de l’Administration**.
 
 ### GNA
 
