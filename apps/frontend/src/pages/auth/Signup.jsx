@@ -129,7 +129,7 @@ export function Signup() {
 
         <div className="relative hidden bg-muted lg:block">
           <img
-            src="/paysage.jpeg"
+            src="/thumbnail.jpeg"
             alt="lorm"
             className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] grayscale"
           />

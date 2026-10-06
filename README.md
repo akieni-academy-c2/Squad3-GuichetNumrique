@@ -31,7 +31,6 @@ Projet réalisé dans le cadre de notre deuxieme evaluation de la formation Akie
 | Alphady MONDZALI | Développement de l'API backend et gestion des routes |
 | Japhet Piergy BASSA | Administration du dépôt (repository) |
 | Souveraine MABELEMO | Rédaction de la documentation de l'application |
-| Tony Ndedi NAVECK FALL | À compléter |
 
 ### Organisation du développement
 
@@ -54,7 +53,7 @@ Projet réalisé dans le cadre de notre deuxieme evaluation de la formation Akie
 ### Installation
 
 ```bash
-git clone <URL_DU_REPOSITORY>
+git clone https://github.com/bjaphet/squad3.git
 cd squad3
 npm install
 ```
