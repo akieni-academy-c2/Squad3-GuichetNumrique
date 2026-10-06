@@ -1,4 +1,4 @@
-# GNA — Guichet Numérique de l’Administration
+# GNA : Guichet Numérique de l’Administration
 
 > Plateforme numérique visant à simplifier et fluidifier les démarches administratives en République du Congo.
 
