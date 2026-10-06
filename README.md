@@ -1,40 +1,172 @@
-# squad33
+# GNA : Guichet Numérique de l’Administration
 
-Monorepo npm avec Turborepo.
+> Plateforme numérique visant à simplifier et fluidifier les démarches administratives en République du Congo.
 
-## Structure
+## Présentation
 
+Le **Guichet Numérique de l’Administration (GNA)** est une plateforme permettant aux citoyens d’accéder plus facilement aux services administratifs.
+
+L’objectif est de centraliser les démarches, réduire les déplacements inutiles et permettre aux citoyens de mieux suivre l’évolution de leurs demandes.
+
+## Problématique
+
+Les démarches administratives peuvent être longues et nécessiter plusieurs déplacements, notamment lorsque le citoyen ne dispose pas d'informations suffisantes sur l'état de sa demande.
+
+GNA apporte une solution numérique pour rendre ces démarches plus accessibles, plus transparentes et plus simples à suivre.
+
+## Objectifs
+
+* Simplifier l'accès aux services administratifs.
+* Permettre la création d'un compte citoyen.
+* Permettre aux citoyens de soumettre leurs demandes en ligne.
+* Fournir une référence pour chaque demande.
+* Faciliter le suivi de l'état d'une demande.
+* Centraliser progressivement les services administratifs.
+
+## MVP
+
+Le MVP actuel couvre principalement :
+
+### US1 — Création d'un compte citoyen
+
+Le citoyen peut créer son compte à partir de ses informations personnelles.
+
+### US2 — Connexion
+
+Le citoyen peut se connecter à son espace personnel et accéder aux fonctionnalités qui lui sont destinées.
+
+### US3 — Demande de CNI
+
+Un citoyen connecté peut effectuer une demande de Carte Nationale d'Identité (CNI).
+
+Chaque demande possède une référence et un statut permettant son identification et son suivi.
+
+## Évolution prévue
+
+Le projet pourra progressivement intégrer :
+
+* la gestion des comptes agents ;
+* le traitement des demandes par les agents ;
+* la validation ou le rejet des demandes ;
+* le suivi détaillé des demandes par les citoyens ;
+* la gestion de plusieurs services administratifs.
+
+## Parcours utilisateur
+
+```text
+Création du compte
+        ↓
+Connexion
+        ↓
+Espace citoyen
+        ↓
+Demande de CNI
+        ↓
+Référence de la demande
+        ↓
+Suivi de la demande
 ```
+
+## Technologies
+
+### Frontend
+
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* React Router
+* shadcn
+* Zustand
+* Lucide React
+
+### Backend
+
+* Express
+* JavaScript
+
+### Outils
+
+* Turbo
+* npm
+* Prettier
+
+## Architecture du projet
+
+Le projet est organisé en **monorepo** avec deux applications principales :
+
+```text
 squad3/
-├── package.json          # racine : workspaces apps/*, scripts turbo
-├── turbo.json            # pipelines dev / build / start
-├── .prettierrc.json      # configuration Prettier
+├── package.json          # Racine : workspaces apps/*, scripts Turbo
+├── turbo.json            # Configuration des tâches dev / build / start
+├── .prettierrc.json      # Configuration Prettier
 └── apps/
-    ├── frontend/         # @frontend/squad3  - Vite + React, JavaScript
-    └── backend/          # @backend/squad3   - Express, JavaScript
+    ├── frontend/         # @frontend/squad3 — Vite + React, JavaScript
+    └── backend/          # @backend/squad3  — Express, JavaScript
 ```
+
+### Frontend
+
+L'application frontend est développée avec React, Vite et JavaScript. Elle contient notamment les composants, pages, layouts, hooks, contextes, stores et services nécessaires à l'interface utilisateur.
+
+### Backend
+
+L'application backend est développée avec Express et JavaScript. Elle constitue la partie serveur de la plateforme.
 
 ## Installation
 
+### Prérequis
+
+* Node.js 20 ou supérieur
+* npm
+* Git
+
+### Installation
+
 ```bash
+git clone <URL_DU_REPOSITORY>
+cd squad3
 npm install
 ```
 
-## Commandes
+### Lancer le projet
 
-Depuis la racine :
-
-| Commande        | Description                                                 |
-| --------------- | ----------------------------------------------------------- |
-| `npm run dev`   | Lance les deux apps en mode développement                   |
-| `npm run build` | Build de production                                         |
-| `npm run start` | Démarre les builds de production                            |
-| `npm run format` | Formate tout le monorepo avec Prettier                 |
-| `npm run format:check` | Vérifie le formatage sans écrire    |
-
-Pour cibler une seule app :
+Pour lancer le projet en mode développement :
 
 ```bash
-npm run dev --workspace @frontend/squad3
-npm run dev --workspace @backend/squad3
+npm run dev
 ```
+
+Le monorepo utilise **Turbo** pour gérer les différentes applications.
+
+### Construire le projet
+
+```bash
+npm run build
+```
+
+### Formater le code
+
+```bash
+npm run format
+```
+
+Pour vérifier le formatage :
+
+```bash
+npm run format:check
+```
+
+## Statut
+
+**MVP en cours de développement.**
+
+## Équipe
+
+** Squad 3**
+
+Projet réalisé dans le cadre de notre deuxieme evaluation de la formation Akieni  **Guichet Numérique de l’Administration**.
+
+### GNA
+
+**Simplifier les démarches administratives, un service à la fois.**
