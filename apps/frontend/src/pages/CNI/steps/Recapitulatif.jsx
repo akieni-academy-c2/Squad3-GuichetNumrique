@@ -152,7 +152,7 @@ export function Recapitulatif() {
         </TabsContent>
       </Tabs>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      {/* <div className="grid gap-3 sm:grid-cols-2">
         <div className="border-border rounded-lg border px-3 py-2.5">
           <p className="text-muted-foreground text-xs tracking-wide uppercase">
             Frais de fabrication
@@ -170,7 +170,7 @@ export function Recapitulatif() {
           </p>
           <p className="text-sm font-medium">{delai}</p>
         </div>
-      </div>
+      </div> */}
 
       {isComplete ? (
         <Alert>
