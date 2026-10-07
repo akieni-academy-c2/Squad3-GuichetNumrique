@@ -22,6 +22,7 @@ export function StepShell({ children }) {
   const goToStep = useStore((state) => state.goToStep);
   const validateAll = useStore((state) => state.validateAll);
   const markSubmitted = useStore((state) => state.markSubmitted);
+  const data = useStore((state) => state.getResumeForApi);
 
   const current = getSubStep(step, subStep);
   const errorList = Object.values(errors);
@@ -29,13 +30,92 @@ export function StepShell({ children }) {
   const isFinal = isLastStep(step) && isLastSubStep(step, subStep);
   const depose = isFinal && Boolean(submittedAt);
 
+  /**
+   *
+   * @param {import("react").SubmitEvent} event
+   * @returns
+   */
   function handleSubmit(event) {
     event.preventDefault();
+    const { form, typeDemande } = useStore.getState();
 
     if (isFinal) {
       if (!validateAll()) {
         return;
       }
+
+      const fd = new FormData();
+      fd.append("typeDemande", typeDemande);
+
+      fd.append("identite.nom", form.identite.nom ?? "");
+      fd.append("identite.prenoms", form.identite.prenoms ?? "");
+      fd.append("identite.sexe", form.identite.sexe ?? "");
+      fd.append("identite.dateNaissance", form.identite.dateNaissance ?? "");
+      fd.append("identite.lieuNaissance", form.identite.lieuNaissance ?? "");
+      fd.append(
+        "identite.provinceNaissance",
+        form.identite.provinceNaissance ?? "",
+      );
+
+      fd.append("filiation.nomPere", form.filiation.nomPere ?? "");
+      fd.append("filiation.nomMere", form.filiation.nomMere ?? "");
+
+      fd.append("residence.province", form.residence.province ?? "");
+      fd.append("residence.ville", form.residence.ville ?? "");
+      fd.append("residence.commune", form.residence.commune ?? "");
+      fd.append("residence.avenue", form.residence.avenue ?? "");
+      fd.append("residence.numero", form.residence.numero ?? "");
+      fd.append("residence.quartier", form.residence.quartier ?? "");
+
+      fd.append("contact.indicatif", form.contact.indicatif ?? "");
+      fd.append("contact.telephone", form.contact.telephone ?? "");
+      fd.append("contact.email", form.contact.email ?? "");
+      fd.append("contact.pointServiceId", form.contact.pointServiceId ?? "");
+
+      fd.append("acte.numeroActe", form.acte.numeroActe ?? "");
+      fd.append("acte.typeActe", form.acte.typeActe ?? "");
+      fd.append("acte.delivreeLe", form.acte.delivreeLe ?? "");
+      fd.append("acte.delivreePar", form.acte.delivreePar ?? "");
+
+      fd.append("nationalite.nationalite", form.nationalite.nationalite ?? "");
+      fd.append(
+        "nationalite.paysEtranger",
+        form.nationalite.paysEtranger ?? "",
+      );
+
+      fd.append(
+        "complement.ancienNumeroCni",
+        form.complement.ancienNumeroCni ?? "",
+      );
+      fd.append(
+        "complement.motifRemplacement",
+        form.complement.motifRemplacement ?? "",
+      );
+      fd.append("complement.declaration", form.complement.declaration ?? "");
+      fd.append(
+        "complement.dateExpiration",
+        form.complement.dateExpiration ?? "",
+      );
+
+      fd.append("paiement.moyen", form.paiement.moyen ?? "");
+      fd.append("paiement.reference", form.paiement.reference ?? "");
+      fd.append("paiement.accepte", form.paiement.accepte ? "true" : "false");
+
+      if (form.pieces.acte_naissance) {
+        fd.append("acte_naissance", form.pieces.acte_naissance);
+      }
+      if (form.pieces.photo_identite) {
+        fd.append("photo_identite", form.pieces.photo_identite);
+      }
+      if (form.pieces.justificatif_sejour) {
+        fd.append("justificatif_sejour", form.pieces.justificatif_sejour);
+      }
+
+      // ++++++++++++++++++++++++++++++++++++++++
+      // ++++++++++++++++++++++++++++++++++++++++
+      // ++++++++++++++++++++++++++++++++++++++++
+      // ++++++++++++++++++++++++++++++++++++++++
+      // fd.forEach((value, key) => console.log({ key: key, value: value }));
       markSubmitted();
       return;
     }
