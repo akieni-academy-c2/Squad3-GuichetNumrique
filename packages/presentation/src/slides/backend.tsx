@@ -42,11 +42,6 @@ export function BackendSlides() {
               configuration.
             </Bullet>
             <Bullet>
-              <strong className="text-kumo-strong">Demandes.</strong> Les
-              statuts Chaque demande change de statut au fil de son traitement.
-              L'API vérifie les données reçues.
-            </Bullet>
-            <Bullet>
               <strong className="text-kumo-strong">Routes.</strong> L'API gère
               les comptes, les demandes, les notifications et les points de
               service.
@@ -63,7 +58,7 @@ export function BackendSlides() {
                   "Contrôleurs",
                   "Reçoivent la requête et préparent la réponse.",
                 ],
-                ["Services", "Appliquent les règles du projet."],
+                ["Services", "Exécutent les traitements de l'API."],
                 ["Dépôts", "Lisent et enregistrent les données."],
               ].map(([name, description]) => (
                 <div

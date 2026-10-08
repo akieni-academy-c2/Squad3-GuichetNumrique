@@ -5,7 +5,7 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div data-mode="dark" className="h-full">
+    <div data-mode="light" className="h-full">
       <App />
     </div>
   </StrictMode>,

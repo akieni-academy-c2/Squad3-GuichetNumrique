@@ -5,9 +5,8 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "reveal.js/reveal.css" layer(reveal);
-@import "reveal.js/theme/black.css" layer(reveal);
+@import "reveal.js/theme/white.css" layer(reveal);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import "reveal.js/plugin/highlight/monokai.css" layer(utilities);
 
 @layer base {
   html,
@@ -33,6 +32,10 @@
   min-width: 0;
   margin: 0;
   font-size: 1.15em;
+  border: 1px solid var(--color-kumo-hairline);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  @apply bg-kumo-recessed text-kumo-default;
 }
 
 .reveal pre code {
@@ -40,4 +43,18 @@
   padding: 1.25rem;
   font-size: 1em;
   line-height: 1.55;
+  @apply bg-transparent text-kumo-default;
+}
+
+.reveal pre code .hljs-keyword,
+.reveal pre code .hljs-title,
+.reveal pre code .hljs-built_in,
+.reveal pre code .hljs-type {
+  @apply font-semibold text-kumo-strong;
+}
+
+.reveal pre code .hljs-string,
+.reveal pre code .hljs-comment,
+.reveal pre code .hljs-attr {
+  @apply text-kumo-subtle;
 }
