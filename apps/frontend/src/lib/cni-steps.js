@@ -197,6 +197,7 @@ export function getRequiredFields(stepNumber, subStepNumber, context = {}) {
   const subStep = getSubStep(stepNumber, subStepNumber);
   const required = [...subStep.fields];
 
+  // Les champs complémentaires varient selon la demande et les données saisies.
   if (subStep.id === "etat_civil" && !typeDemande) {
     required.push("typeDemande");
   }

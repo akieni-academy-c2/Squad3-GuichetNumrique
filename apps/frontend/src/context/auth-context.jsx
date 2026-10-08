@@ -19,6 +19,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
+        // Vérifie le jeton auprès de l'API avant de restaurer la session locale.
         const res = await fetch("/api/auth/me", {
           headers: { Authorization: `Bearer ${stored}` },
         });

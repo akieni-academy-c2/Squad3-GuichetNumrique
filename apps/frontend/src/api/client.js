@@ -13,6 +13,7 @@ export async function apiFetch(
 ) {
   const isFormData = body instanceof FormData;
 
+  // Garde le même contrat pour les corps JSON, les fichiers et les erreurs d'API.
   const res = await fetch(`/api${path}`, {
     ...options,
     headers: {

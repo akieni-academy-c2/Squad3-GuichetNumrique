@@ -154,6 +154,7 @@ function migratePersistedState(persisted) {
     return persisted;
   }
 
+  // Renomme l'ancienne pièce et complète les champs ajoutés depuis la sauvegarde.
   const pieces = { ...persisted.form.pieces };
 
   if (
@@ -192,6 +193,7 @@ export const useStore = create(
       setField: (path, value) =>
         set((state) => {
           const keys = path.split(".");
+          // Copie chaque niveau du chemin pour préserver les mises à jour immuables.
           const nextForm = { ...state.form };
           let cursor = nextForm;
 
@@ -270,6 +272,7 @@ export const useStore = create(
         const errors = {};
         let premiereEtape = null;
 
+        // Retient la première sous-étape incomplète pour y ramener l'usager.
         STEPS.forEach((step) => {
           step.subSteps.forEach((subStep) => {
             const required = getRequiredFields(step.number, subStep.number, {
@@ -332,6 +335,7 @@ export const useStore = create(
       getProgress: () => {
         const { completed } = get();
         const done = Object.values(completed).filter(Boolean).length;
+        // Le total reste lié à la configuration des étapes, pas à une valeur fixe.
         return {
           done,
           total: TOTAL_SUB_STEPS,
@@ -429,6 +433,7 @@ export const useStore = create(
       name: "cni-dossier",
       version: 2,
       migrate: migratePersistedState,
+      // Les données temporaires, comme la liste des antennes, sont rechargées séparément.
       partialize: (state) => ({
         typeDemande: state.typeDemande,
         step: state.step,
