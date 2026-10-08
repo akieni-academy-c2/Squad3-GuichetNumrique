@@ -1,0 +1,25 @@
+name: "DEPLOY PRESENTATION"
+
+on:
+  push:
+    branches: [main, feat/presentation]
+
+permissions:
+  contents: read
+
+jobs:
+  presentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: ./.github/actions/setup
+      - name: Build
+        run: npm run build --workspace=presentation
+      - name: Deploy
+        run: npx wrangler pages deploy
+        working-directory: packages/presentation
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

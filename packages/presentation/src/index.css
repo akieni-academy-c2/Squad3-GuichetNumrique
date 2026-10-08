@@ -1,0 +1,60 @@
+@layer theme, base, reveal, components, utilities;
+
+@source "../node_modules/@cloudflare/kumo/dist/**/*.{js,jsx,ts,tsx}";
+@import "@cloudflare/kumo/styles/tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "reveal.js/reveal.css" layer(reveal);
+@import "reveal.js/theme/white.css" layer(reveal);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    @apply bg-kumo-canvas text-kumo-default;
+  }
+}
+
+.reveal {
+  --r-heading-font: ui-sans-serif, system-ui, sans-serif;
+  --r-main-font: ui-sans-serif, system-ui, sans-serif;
+}
+
+.reveal pre {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.15em;
+  border: 1px solid var(--color-kumo-hairline);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  @apply bg-kumo-recessed text-kumo-default;
+}
+
+.reveal pre code {
+  max-height: none;
+  padding: 1.25rem;
+  font-size: 1em;
+  line-height: 1.55;
+  @apply bg-transparent text-kumo-default;
+}
+
+.reveal pre code .hljs-keyword,
+.reveal pre code .hljs-title,
+.reveal pre code .hljs-built_in,
+.reveal pre code .hljs-type {
+  @apply font-semibold text-kumo-strong;
+}
+
+.reveal pre code .hljs-string,
+.reveal pre code .hljs-comment,
+.reveal pre code .hljs-attr {
+  @apply text-kumo-subtle;
+}
