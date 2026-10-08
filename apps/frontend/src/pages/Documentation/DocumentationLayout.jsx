@@ -1,3 +1,7 @@
+/**
+ * @author Souveraine Mabelemo
+ * @created 2026-10-06
+ */
 import {
   BookOpenIcon,
   CalendarClockIcon,
@@ -10,6 +14,7 @@ import {
 import { Link, Outlet, useLocation } from "react-router";
 
 import { DOCUMENTATION } from "@/lib/documentation";
+// Associe chaque rubrique de documentation à l'icône utilisée dans le menu.
 
 const ICONS = {
   introduction: IdCardIcon,
@@ -20,6 +25,12 @@ const ICONS = {
   "motifs-de-rejet": CircleAlertIcon,
   "centres-de-production": MapPinIcon,
 };
+/**
+ * Layout principal de la documentation CNI.
+ *
+ * Affiche le menu de navigation des rubriques
+ * et rend la page enfant active via Outlet.
+ */
 
 export function DocumentationLayout() {
   const { pathname } = useLocation();
@@ -36,6 +47,7 @@ export function DocumentationLayout() {
       <div className="grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)]">
         <nav className="lg:sticky lg:top-4 lg:self-start">
           <ul className="flex flex-col gap-1">
+            {/* Génère automatiquement le menu à partir des rubriques disponibles. */}
             {DOCUMENTATION.map((doc) => {
               const Icon = ICONS[doc.slug] ?? BookOpenIcon;
               const isCurrent = pathname.endsWith(doc.slug);
