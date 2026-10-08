@@ -4,7 +4,6 @@ import { Bullet, Bullets } from "../components/Bullets.tsx";
 import { Frame } from "../components/Frame.tsx";
 import { Kicker } from "../components/Kicker.tsx";
 import { Title } from "../components/Title.tsx";
-import { Tree } from "../components/Tree.tsx";
 
 const STEPS_UI = [
   {
@@ -35,44 +34,59 @@ export function FrontendSlides() {
       <Slide>
         <Frame>
           <Kicker>04 · Frontend</Kicker>
-          <Title size="lg">Architecture de l'application</Title>
+          <Title size="lg">Comment l'application est organisée</Title>
           <div className="mt-10 grid min-w-0 grid-cols-[1.1fr_1fr] items-start gap-8">
-            <Tree>{`apps/frontend/src/
-├── api/          client HTTP + endpoints
-├── lib/          configs déclaratives
-├── store/        store Zustand unique
-├── pages/
-│   ├── CNI/      formulaire (steps/)
-│   ├── auth/     Signin, Signup
-│   └── Dashboard.jsx
-├── components/
-│   └── ui/       composants shadcn
-├── hooks/        useSignin, useRegister...
-└── context/      auth (session)`}</Tree>
+            <LayerCard className="rounded-xl bg-kumo-base p-6 ring ring-kumo-hairline">
+              <p className="mb-4 text-lg font-semibold text-kumo-strong">
+                Les espaces principaux
+              </p>
+              <div className="space-y-3 text-base">
+                {[
+                  ["api", "Envoie les demandes au serveur."],
+                  ["lib", "Rassemble les règles et la configuration."],
+                  ["store", "Conserve les réponses du formulaire."],
+                  ["pages", "Affiche les démarches et l'espace citoyen."],
+                  ["components/ui", "Réunit les éléments de l'interface."],
+                  ["hooks et context", "Partagent la logique et la session."],
+                ].map(([name, description]) => (
+                  <div
+                    key={name}
+                    className="flex flex-wrap items-baseline gap-x-2 border-b border-kumo-hairline pb-2 last:border-0 last:pb-0"
+                  >
+                    <code className="text-kumo-strong">{name}</code>
+                    <span className="text-kumo-subtle">{description}</span>
+                  </div>
+                ))}
+              </div>
+            </LayerCard>
             <Bullets>
               <Bullet>
-                <strong className="text-kumo-strong">Vite + React 19</strong> en
-                JavaScript / JSX
+                <strong className="text-kumo-strong">Vite et React 19.</strong>{" "}
+                Le frontend est écrit en JavaScript et JSX.
               </Bullet>
               <Bullet>
-                Le routage est géré par <strong className="text-kumo-strong">React Router</strong>, avec{" "}
+                <strong className="text-kumo-strong">React Router.</strong>{" "}
+                Affiche les bonnes pages et protège l'espace privé grâce à{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-lg text-kumo-strong">
                   routes.jsx
                 </code>{" "}
-                et une garde nommée{" "}
+                et{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-lg text-kumo-strong">
                   ProtectedRoute
                 </code>
+                .
               </Bullet>
               <Bullet>
-                Un seul store pour tout le formulaire de demande de CNI
+                <strong className="text-kumo-strong">Formulaire CNI.</strong>{" "}
+                Les réponses restent disponibles d'une étape à l'autre.
               </Bullet>
               <Bullet>
-                Les règles métier se trouvent dans{" "}
+                <strong className="text-kumo-strong">Règles métier.</strong>{" "}
+                Vous les retrouverez dans{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-lg text-kumo-strong">
                   lib/
                 </code>
-                , pas dans les composants
+                .
               </Bullet>
             </Bullets>
           </div>
@@ -82,7 +96,7 @@ export function FrontendSlides() {
       <Slide>
         <Frame>
           <Kicker>04 · Frontend, le store</Kicker>
-          <Title size="lg">Un seul store qui garde le formulaire</Title>
+          <Title size="lg">Un seul store pour le formulaire</Title>
           <div className="mt-8 grid grid-cols-[1.15fr_1fr] items-start gap-10">
             <div className="text-sm leading-relaxed">
               <Code language="jsx" trim>
@@ -112,9 +126,9 @@ export function FrontendSlides() {
             </div>
             <Bullets className="text-lg">
               <Bullet>
-                <strong className="text-kumo-strong">Zustand</strong> gère l'état
-                du formulaire sans provider. Les composants ne lisent que les
-                valeurs dont ils ont besoin, par exemple{" "}
+                <strong className="text-kumo-strong">Zustand.</strong> Le store
+                garde les réponses du formulaire. Chaque composant lit
+                uniquement ce dont il a besoin, par exemple{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
                   useStore((s) =&gt; s.step)
                 </code>
@@ -123,20 +137,22 @@ export function FrontendSlides() {
                 <strong className="text-kumo-strong">
                   setField("identite.nom", v)
                 </strong>{" "}
-                met à jour le champ sans modifier l'état d'origine, puis efface
-                son message d'erreur.
+                met à jour le champ et retire son message d'erreur.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">persist</strong> : le dossier
-                survit au rechargement de la page
+                <strong className="text-kumo-strong">persist.</strong> Les
+                réponses restent disponibles après un rechargement de la page.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">version + migrate</strong> :
-                l'évolution du schéma ne perd pas les données
+                <strong className="text-kumo-strong">
+                  version et migrate.
+                </strong>{" "}
+                Ces options permettent de faire évoluer la structure du
+                formulaire.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">partialize</strong> : seules les
-                données utiles sont sérialisées
+                <strong className="text-kumo-strong">partialize.</strong> Seules
+                les données utiles sont enregistrées.
               </Bullet>
             </Bullets>
           </div>
@@ -150,35 +166,39 @@ export function FrontendSlides() {
           <div className="mt-8 grid grid-cols-[1fr_1.05fr] items-start gap-10">
             <Bullets className="text-lg">
               <Bullet>
-                <strong className="text-kumo-strong">next()</strong> valide la
-                sous-étape et la marque comme terminée dans{" "}
+                <strong className="text-kumo-strong">next().</strong> Vérifie
+                les réponses et marque la sous-étape comme terminée dans{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
                   completed
                 </code>{" "}
-                avant de passer à la suivante.
+                puis ouvre la suivante.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">validateSubStep()</strong>{" "}
-                vérifie les champs requis et associe les messages à leur chemin via{" "}
+                <strong className="text-kumo-strong">validateSubStep().</strong>{" "}
+                Vérifie les champs requis et affiche un message clair pour
+                chaque erreur grâce à{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
                   LABELS
                 </code>
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">validateAll()</strong>{" "}
-                vérifie les huit sous-étapes et ramène l'utilisateur à la première erreur.
+                <strong className="text-kumo-strong">validateAll().</strong>{" "}
+                Vérifie les huit sous-étapes et ramène l'usager à la première
+                erreur.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">getProgress()</strong>{" "}
-                calcule le pourcentage à partir de{" "}
+                <strong className="text-kumo-strong">getProgress().</strong>{" "}
+                Calcule la progression en comparant les étapes terminées au
+                total de{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
                   completed / TOTAL_SUB_STEPS
-                </code>{" "}
+                </code>
+                .
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">markSubmitted()</strong> +{" "}
-                <strong className="text-kumo-strong">getResumeForApi()</strong>{" "}
-                prépare les données à envoyer lors du dépôt.
+                <strong className="text-kumo-strong">markSubmitted()</strong> et{" "}
+                <strong className="text-kumo-strong">getResumeForApi().</strong>{" "}
+                Confirment le dépôt et préparent les données pour l'API.
               </Bullet>
             </Bullets>
             <div className="text-sm leading-relaxed">
@@ -225,17 +245,17 @@ export function FrontendSlides() {
 ];`}
               </Code>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 content-start gap-3">
               {STEPS_UI.map((step) => (
                 <Fragment key={step.number} animation="fade-up" asChild>
-                  <LayerCard className="rounded-xl bg-kumo-base px-6 py-4 ring ring-kumo-hairline">
-                    <p className="text-sm font-semibold text-kumo-subtle">
+                  <LayerCard className="rounded-xl bg-kumo-base p-4 ring ring-kumo-hairline">
+                    <p className="text-xs font-semibold text-kumo-subtle">
                       Étape {step.number}
                     </p>
-                    <p className="text-xl font-semibold text-kumo-strong">
+                    <p className="mt-1 text-lg font-semibold text-kumo-strong">
                       {step.title}
                     </p>
-                    <p className="text-base text-kumo-subtle">
+                    <p className="mt-1 text-sm text-kumo-subtle">
                       {step.subSteps.join("  ·  ")}
                     </p>
                   </LayerCard>
@@ -249,34 +269,35 @@ export function FrontendSlides() {
       <Slide>
         <Frame>
           <Kicker>04 · Frontend, le formulaire</Kicker>
-          <Title size="lg">Des étapes guidées et des champs vérifiés</Title>
+          <Title size="lg">Un parcours guidé, avec des champs vérifiés</Title>
           <div className="mt-8 grid grid-cols-[1fr_1.1fr] items-start gap-10">
             <Bullets className="text-lg">
               <Bullet>
-                <strong className="text-kumo-strong">getNext / getPrevious</strong>{" "}
-                sont des fonctions simples qui gèrent les changements d'étape et
-                le retour arrière.
+                <strong className="text-kumo-strong">
+                  getNext / getPrevious.
+                </strong>{" "}
+                Passent à l'étape suivante ou reviennent à la précédente.
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">getRequiredFields</strong>{" "}
-                adapte les champs requis à la situation de l'usager.
+                <strong className="text-kumo-strong">getRequiredFields.</strong>{" "}
+                Affiche les champs requis selon le type de demande.
               </Bullet>
               <Bullet>
-                Clés{" "}
-                <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
-                  completed["3.2"]
-                </code>{" "}
-                sert à suivre la progression et à reprendre un dossier grâce à{" "}
+                <strong className="text-kumo-strong">completed["3.2"].</strong>{" "}
+                Signale une sous-étape terminée. Cette valeur aide à reprendre
+                le formulaire au bon endroit avec{" "}
                 <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
                   getResumeStep
                 </code>
-                )
+                .
               </Bullet>
               <Bullet>
-                <strong className="text-kumo-strong">StepShell</strong> gère la
-                navigation et l'envoi du formulaire. <strong className="text-kumo-strong">StepAside</strong>{" "}
-                affiche le récapitulatif, tandis que <strong className="text-kumo-strong">form-stepper</strong>{" "}
-                montre l'avancement.
+                <strong className="text-kumo-strong">StepShell.</strong> Guide
+                la navigation et l'envoi du dossier.{" "}
+                <strong className="text-kumo-strong">StepAside.</strong>{" "}
+                Présente le récapitulatif.{" "}
+                <strong className="text-kumo-strong">form-stepper.</strong>{" "}
+                Montre la progression.
               </Bullet>
             </Bullets>
             <div className="text-sm leading-relaxed">
@@ -324,9 +345,8 @@ export function FrontendSlides() {
                     cni-config.js
                   </td>
                   <td className="px-6 py-4 text-kumo-default">
-                    Référentiels : types de demande, départements / villes /
-                    arrondissements, pièces (formats, 10 Mo max), frais, délais,
-                    motifs de rejet, centres d'enrôlement
+                    Définit les types de demande, les pièces, les frais, les
+                    délais et les centres d'enrôlement.
                   </td>
                 </tr>
                 <tr>
@@ -334,7 +354,7 @@ export function FrontendSlides() {
                     cni-steps.js
                   </td>
                   <td className="px-6 py-4 text-kumo-default">
-                    STEPS + navigation + champs requis par sous-étape
+                    Décrit les étapes, la navigation et les champs requis.
                   </td>
                 </tr>
                 <tr>
@@ -342,8 +362,7 @@ export function FrontendSlides() {
                     documentation.js
                   </td>
                   <td className="px-6 py-4 text-kumo-default">
-                    Contenu de l'espace Documentation (sources officielles
-                    incluses)
+                    Réunit les guides et les sources officielles.
                   </td>
                 </tr>
                 <tr>
@@ -351,11 +370,14 @@ export function FrontendSlides() {
                     fichiers.js
                   </td>
                   <td className="px-6 py-4 text-kumo-default">
-                    Registre des pièces jointes + validation (extension, taille)
+                    Liste les pièces jointes et vérifie leur format et leur
+                    taille.
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 font-mono text-kumo-strong">utils.js</td>
+                  <td className="px-6 py-4 font-mono text-kumo-strong">
+                    utils.js
+                  </td>
                   <td className="px-6 py-4 text-kumo-default">
                     <code>cn()</code> combine clsx et tailwind-merge.
                   </td>
@@ -364,64 +386,18 @@ export function FrontendSlides() {
             </table>
           </LayerCard>
           <p className="mt-6 text-xl text-kumo-subtle">
-            Pour ajouter une étape, il suffit de l'inscrire dans STEPS.{" "}
-            <span className="text-kumo-strong">L'interface suit automatiquement.</span>
+            Ajoutez une étape dans STEPS.{" "}
+            <span className="text-kumo-strong">
+              Le formulaire la prend en compte.
+            </span>
           </p>
         </Frame>
       </Slide>
 
       <Slide>
-        <Frame>
-          <Kicker>05 · Design</Kicker>
-          <Title size="lg">shadcn/ui</Title>
-          <div className="mt-8 grid grid-cols-[1fr_1.05fr] items-center gap-10">
-            <Bullets className="text-lg">
-              <Bullet>
-                <strong className="text-kumo-strong">24 composants</strong> copiés
-                dans le projet : button, sidebar, table, calendar, select,
-                dialog...
-              </Bullet>
-              <Bullet>
-                Config : style{" "}
-                <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
-                  base-nova
-                </code>
-                , baseColor{" "}
-                <code className="rounded bg-kumo-recessed px-1.5 py-0.5 text-base text-kumo-strong">
-                  mist
-                </code>
-                , variables CSS
-              </Bullet>
-              <Bullet>
-                Tailwind CSS 4 se configure directement en CSS.
-              </Bullet>
-              <Bullet>
-                Runtime <strong className="text-kumo-strong">Base UI</strong>, icônes{" "}
-                <strong className="text-kumo-strong">Lucide</strong>, polices Geist +
-                Inter
-              </Bullet>
-              <Bullet>Composants thémables : dark mode et RTL prêts</Bullet>
-            </Bullets>
-            <div className="flex justify-center">
-              <img
-                src="shadcn.png"
-                alt="Composants shadcn/ui"
-                className="max-h-[420px] w-auto rounded-xl object-contain ring ring-kumo-hairline"
-              />
-            </div>
-          </div>
-        </Frame>
-      </Slide>
-
-      <Slide>
-        <Frame
-          center
-          className="bg-kumo-canvas"
-        >
+        <Frame center className="bg-kumo-canvas">
           <Fragment>
-            <p className="mb-6 text-sm font-semibold text-kumo-strong">
-              GNA
-            </p>
+            <p className="mb-6 text-sm font-semibold text-kumo-strong">GNA</p>
             <Title size="xl">Merci</Title>
           </Fragment>
         </Frame>

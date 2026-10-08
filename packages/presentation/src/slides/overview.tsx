@@ -19,7 +19,7 @@ export function OverviewSlides() {
             Guichet Numérique de l'Administration
           </p>
           <p className="mt-10 text-xl text-kumo-subtle">
-            Découvrez le projet, son organisation et ses applications.
+            Un seul endroit pour vos démarches administratives.
           </p>
         </Frame>
       </Slide>
@@ -32,31 +32,25 @@ export function OverviewSlides() {
             <Fragment>
               <Bullet>
                 <strong className="text-kumo-strong">Le projet.</strong>{" "}
-                Découvrez ses objectifs et les premières fonctions du MVP.
+                Pourquoi nous avons créé ce service et ce qu'il propose déjà.
               </Bullet>
             </Fragment>
             <Fragment>
               <Bullet>
                 <strong className="text-kumo-strong">Le monorepo.</strong>{" "}
-                Voyons comment le dépôt réunit les applications et leurs outils.
+                Comment le dépôt réunit le frontend, l'API et leurs outils.
               </Bullet>
             </Fragment>
             <Fragment>
               <Bullet>
-                <strong className="text-kumo-strong">Le backend.</strong>{" "}
-                L'équipe présente son API et ses principaux services.
+                <strong className="text-kumo-strong">Le backend.</strong> Les
+                services qui font fonctionner l'API.
               </Bullet>
             </Fragment>
             <Fragment>
               <Bullet>
-                <strong className="text-kumo-strong">Le frontend.</strong>{" "}
-                Nous verrons le formulaire, son état et ses étapes.
-              </Bullet>
-            </Fragment>
-            <Fragment>
-              <Bullet>
-                <strong className="text-kumo-strong">Le design.</strong>{" "}
-                Voici comment shadcn/ui structure les composants de l'interface.
+                <strong className="text-kumo-strong">Le frontend.</strong> Le
+                formulaire de demande et son fonctionnement.
               </Bullet>
             </Fragment>
           </Bullets>
@@ -74,13 +68,11 @@ export function OverviewSlides() {
               </p>
               <Bullets>
                 <Bullet>
-                  Démarches administratives longues et répétitives
+                  Certaines démarches demandent du temps et se répètent.
                 </Bullet>
+                <Bullet>Il faut souvent se rendre au guichet.</Bullet>
                 <Bullet>
-                  Déplacements inutiles vers les guichets physiques
-                </Bullet>
-                <Bullet>
-                  Aucune visibilité sur l'état d'avancement d'un dossier
+                  Il est difficile de savoir où en est son dossier.
                 </Bullet>
               </Bullets>
             </LayerCard>
@@ -90,21 +82,19 @@ export function OverviewSlides() {
               </p>
               <Bullets>
                 <Bullet>
-                  Centraliser les démarches sur une plateforme numérique
+                  Retrouver les démarches sur une seule plateforme.
                 </Bullet>
+                <Bullet>Déposer sa demande depuis chez soi.</Bullet>
                 <Bullet>
-                  Permettre le dépôt des demandes en ligne, depuis chez soi
-                </Bullet>
-                <Bullet>
-                  Donner une référence et un statut à chaque demande
+                  Suivre son dossier grâce à une référence et un statut.
                 </Bullet>
               </Bullets>
             </LayerCard>
           </div>
           <Bullets className="mt-8 text-lg text-kumo-subtle">
             <Bullet>
-              Objectifs : accès simplifié · compte citoyen · suivi en
-              transparence · centralisation progressive des services
+              Chaque citoyen crée son compte, dépose une demande et suit son
+              dossier.
             </Bullet>
           </Bullets>
         </Frame>
@@ -113,7 +103,7 @@ export function OverviewSlides() {
       <Slide>
         <Frame>
           <Kicker>01 · Le projet</Kicker>
-          <Title size="lg">Un MVP en trois user stories</Title>
+          <Title size="lg">Trois parcours essentiels</Title>
           <div className="mt-10 grid grid-cols-3 gap-6">
             {[
               {
@@ -124,12 +114,12 @@ export function OverviewSlides() {
               {
                 us: "US2",
                 title: "Connexion",
-                text: "Il se connecte et accède à son espace personnel.",
+                text: "Il se connecte pour retrouver son espace personnel.",
               },
               {
                 us: "US3",
                 title: "Demande de CNI",
-                text: "Il dépose une demande en ligne : référence + statut de suivi.",
+                text: "Il dépose sa demande et suit son avancement.",
               },
             ].map((item) => (
               <LayerCard
