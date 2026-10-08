@@ -1,3 +1,10 @@
+/**
+ * @author Souveraine Mabelemo
+ * @created 2026-10-06
+ *
+ * Source de données de la fonctionnalité Documentation.
+ * Contient les rubriques, leurs sections et les sources officielles.
+ */
 import {
   CENTRES_CNI,
   DELAI_MODIFICATION_HEURES,
@@ -10,6 +17,7 @@ import {
   TYPES_DEMANDE,
   VALIDITE_CARTE_ANNEES,
 } from "@/lib/cni-config";
+// Sources officielles utilisées comme références pour la documentation.
 
 export const OFFICIAL_SOURCES = [
   {
@@ -18,6 +26,7 @@ export const OFFICIAL_SOURCES = [
     url: "https://www.sgg.cg/JO/2024/congo-jo-2024-47.pdf",
   },
 ];
+// Ensemble des rubriques affichées dans l'interface de documentation.
 
 export const DOCUMENTATION = [
   {
@@ -387,6 +396,11 @@ export const DOCUMENTATION = [
 ];
 
 /**
+ * Recherche une rubrique de documentation à partir de son slug.
+ *
+ * Le slug provient de l'URL et permet de retrouver
+ * le contenu correspondant dans DOCUMENTATION.
+ *
  * @param {string} slug
  */
 export function getDocument(slug) {
